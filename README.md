@@ -1,4 +1,4 @@
-# MY-PRODUCT-NAME
+# JPA Persistence Lib
 
 [![CI Build](https://github.com/axonivy-market/REPO-NAME/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/REPO-NAME/actions/workflows/ci.yml)
 

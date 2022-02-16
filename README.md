@@ -1,7 +1,7 @@
 # JPA Persistence Lib
 
-[![CI Build](https://github.com/axonivy-market/REPO-NAME/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/REPO-NAME/actions/workflows/ci.yml)
+[![CI Build](https://github.com/axonivy-market/jpa-persistence-lib/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/jpa-persistence-lib/actions/workflows/ci.yml)
 
-"YOUR SHORT DESCRIPTION GOES HERE"
+"JPA Persistence Lib"
 
-Read our [documentation](MY-PRODUCT-NAME-product/README.md).
+Read our [documentation](jpa-persistence-lib-product/README.md).

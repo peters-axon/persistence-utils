@@ -34,6 +34,7 @@ Ph0 f0 callSignature personSearch() #txt
 Ph0 f0 startName <%=ivy.cms.co("/Processes/Names/personSearch")%> #txt
 Ph0 f0 caseData businessCase.attach=true #txt
 Ph0 f0 wfuser 1 #txt
+Ph0 f0 @CG|tags demo #txt
 Ph0 f0 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -76,6 +77,7 @@ Ph0 f6 callSignature departmentSearch() #txt
 Ph0 f6 startName <%=ivy.cms.co("/Processes/Names/departmentSearch")%> #txt
 Ph0 f6 caseData businessCase.attach=true #txt
 Ph0 f6 wfuser 1 #txt
+Ph0 f6 @CG|tags demo #txt
 Ph0 f6 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -134,6 +136,7 @@ Ph0 f14 callSignature raiseSalary() #txt
 Ph0 f14 startName <%=ivy.cms.co("/Processes/Names/raiseSalaries")%> #txt
 Ph0 f14 caseData businessCase.attach=true #txt
 Ph0 f14 wfuser 1 #txt
+Ph0 f14 @CG|tags demo #txt
 Ph0 f14 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>

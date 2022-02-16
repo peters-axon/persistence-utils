@@ -24,13 +24,11 @@ import org.dbunit.dataset.excel.XlsDataSet;
 import org.dbunit.ext.hsqldb.HsqldbDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.internal.SessionImpl;
-import org.hibernate.jpa.HibernateEntityManager;
 
+import com.axonivy.market.jpa.demo.Logger;
 import com.axonivy.persistence.beans.GenericEntity;
 import com.axonivy.persistence.beans.GenericEntity_;
 import com.axonivy.persistence.dao.GenericDAO;
-
-import com.axonivy.market.jpa.demo.Logger;
 
 public abstract class TestDAO extends GenericDAO<GenericEntity_, GenericEntity<String>> {
 	private static final Logger LOG = Logger.getLogger(TestDAO.class);
@@ -38,10 +36,6 @@ public abstract class TestDAO extends GenericDAO<GenericEntity_, GenericEntity<S
 	@Override
 	protected Class<GenericEntity<String>> getType() {
 		return null;
-	}
-
-	public HibernateEntityManager getInternalEm() {
-		return getEM();
 	}
 
 	/**

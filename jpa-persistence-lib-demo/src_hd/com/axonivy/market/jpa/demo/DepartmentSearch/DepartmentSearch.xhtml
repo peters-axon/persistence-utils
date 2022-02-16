@@ -83,7 +83,8 @@
 							<div class="ui-g-12 ui-md-6 ui-lg-6">
 							</div>
 							<div class="ui-g-12 ui-md-6 ui-lg-6 right">
-								<p:commandButton id="saveButton" value="#{data.departmentSearchBean.saveViolationMaxWarning ? ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/DepartmentSearch/saveAnyway') : ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/DepartmentSearch/save')}" actionListener="#{logic.saveDepartment}" update="mainForm:departmentTable mainForm:growl dialogButtons"/>
+								<p:commandButton id="saveButton" value="#{ivy.cms.co(data.departmentSearchBean.saveViolationMaxWarning ? '/Dialogs/com/axonivy/demo/jpa_demo/core/DepartmentSearch/saveAnyway' : '/Dialogs/com/axonivy/demo/jpa_demo/core/DepartmentSearch/save')}" 
+									actionListener="#{logic.saveDepartment}" update="mainForm:departmentTable mainForm:growl dialogButtons"/>
 								<p:commandButton value="#{ivy.cms.co('/Labels/cancel')}" actionListener="#{logic.cancelDepartment}" oncomplete="PF('departmentDialog').hide()" update="mainForm"/>
 							</div>
 						</div>

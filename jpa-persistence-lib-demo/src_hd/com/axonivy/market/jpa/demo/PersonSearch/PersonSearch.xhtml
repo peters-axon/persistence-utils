@@ -200,7 +200,8 @@
 							<div class="ui-g-12 ui-md-6 ui-lg-6">
 							</div>
 							<div class="ui-g-12 ui-md-6 ui-lg-6 right">
-								<p:commandButton id="saveButton" value="#{data.personSearchBean.saveViolationMaxWarning ? ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/saveAnyway') : ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/save')}" actionListener="#{logic.savePerson}" update="mainForm:personTable mainForm:growl dialogButtons"/>
+								<p:commandButton id="saveButton" value="#{ivy.cms.co(data.personSearchBean.saveViolationMaxWarning ? '/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/saveAnyway' : '/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/save')}" 
+									actionListener="#{logic.savePerson}" update="mainForm:personTable mainForm:growl dialogButtons"/>
 								<p:commandButton value="#{ivy.cms.co('/Labels/cancel')}" actionListener="#{logic.cancelPerson}" oncomplete="PF('personDialog').hide()" update="mainForm"/>
 							</div>
 						</div>

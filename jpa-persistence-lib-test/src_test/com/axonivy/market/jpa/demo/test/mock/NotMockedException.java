@@ -1,10 +1,17 @@
 package com.axonivy.market.jpa.demo.test.mock;
 
 public class NotMockedException extends RuntimeException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
 	public NotMockedException() {
 		super(getFunction());
 	}
 
+	
 	private static String getFunction() {
 		String result = "<unknown>";
 		try {

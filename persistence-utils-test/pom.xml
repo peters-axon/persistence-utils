@@ -3,13 +3,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.axonivy.utils.persistence</groupId>
-  <artifactId>jpa-persistence-lib-test</artifactId>
+  <artifactId>persistence-utils-test</artifactId>
   <version>9.3.0-SNAPSHOT</version>
   <packaging>iar-integration-test</packaging>
   <dependencies>
     <dependency>
       <groupId>com.axonivy.utils.persistence</groupId>
-      <artifactId>jpa-persistence-lib-demo</artifactId>
+      <artifactId>persistence-utils-demo</artifactId>
       <version>${project.version}</version>
       <type>iar</type>
     </dependency>

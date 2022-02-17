@@ -5,14 +5,14 @@
       "data": {
         "projects": [
           {
-            "groupId": "com.axonivy.market",
-            "artifactId": "jpa-persistence-lib-demo",
+            "groupId": "com.axonivy.utils.persistence",
+            "artifactId": "persistence-utils-demo",
             "version": "${version}",
             "type": "iar"
           },
           {
-            "groupId": "com.axonivy.market",
-            "artifactId": "jpa-persistence-lib-test",
+            "groupId": "com.axonivy.utils.persistence",
+            "artifactId": "persistence-utils-test",
             "version": "${version}",
             "type": "iar",
             "importInWorkspace": "false"

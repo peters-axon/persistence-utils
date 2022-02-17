@@ -1,5 +1,5 @@
-# JPA Persistence Lib Demo
-Axon Ivy's JPA Persistence Lib Demo 
+# Persistence Utils
+Axon Ivy's Persistence Utils 
 
 ## Demo
 

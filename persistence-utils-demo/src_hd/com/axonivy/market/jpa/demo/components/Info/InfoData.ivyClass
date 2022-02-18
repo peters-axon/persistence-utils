@@ -1,4 +1,0 @@
-InfoData #class
-com.axonivy.market.jpa.demo.components.Info #namespace
-value String #field
-value PERSISTENT #fieldModifier

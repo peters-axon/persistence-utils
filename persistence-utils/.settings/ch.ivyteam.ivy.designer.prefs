@@ -1,4 +1,4 @@
-ch.ivyteam.ivy.designer.preferences.DataClassPreferencePage\:DEFAULT_DATA_CLASS=com.axonivy.market.jpa.persistence.lib.Data
-ch.ivyteam.ivy.designer.preferences.DataClassPreferencePage\:DEFAULT_NAMESPACE=com.axonivy.market.jpa.persistence.lib
+ch.ivyteam.ivy.designer.preferences.DataClassPreferencePage\:DEFAULT_DATA_CLASS=com.axonivy.utils.persistence.Data
+ch.ivyteam.ivy.designer.preferences.DataClassPreferencePage\:DEFAULT_NAMESPACE=com.axonivy.utils.persistence
 ch.ivyteam.ivy.project.preferences\:PROJECT_VERSION=93900
 eclipse.preferences.version=1

@@ -1,8 +1,0 @@
-DepartmentSearchData #class
-com.axonivy.market.jpa.demo.DepartmentSearch #namespace
-departmentId String #field
-departmentId PERSISTENT #fieldModifier
-secondSave Boolean #field
-secondSave PERSISTENT #fieldModifier
-departmentSearchBean com.axonivy.market.jpa.demo.ui.DepartmentSearchBean #field
-departmentSearchBean PERSISTENT #fieldModifier

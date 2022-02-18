@@ -1,0 +1,8 @@
+DepartmentSearchData #class
+com.axonivy.utils.persistence.demo.DepartmentSearch #namespace
+departmentId String #field
+departmentId PERSISTENT #fieldModifier
+secondSave Boolean #field
+secondSave PERSISTENT #fieldModifier
+departmentSearchBean com.axonivy.utils.persistence.demo.ui.DepartmentSearchBean #field
+departmentSearchBean PERSISTENT #fieldModifier

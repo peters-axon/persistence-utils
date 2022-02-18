@@ -45,7 +45,7 @@ Ph0 f0 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 Ph0 f0 @C|.responsibility Everybody #txt
 Ph0 f0 81 113 30 30 -21 17 #rect
 Ph0 f1 337 113 30 30 0 15 #rect
-Ph0 f3 dialogId com.axonivy.market.jpa.demo.PersonSearch #txt
+Ph0 f3 dialogId com.axonivy.utils.persistence.demo.PersonSearch #txt
 Ph0 f3 startMethod start() #txt
 Ph0 f3 requestActionDecl '<> param;' #txt
 Ph0 f3 responseMappingAction 'out=in;
@@ -96,7 +96,7 @@ Client side filtering and sorting</name>
 </elementInfo>
 ' #txt
 Ph0 f7 80 234 176 44 -83 -16 #rect
-Ph0 f8 dialogId com.axonivy.market.jpa.demo.DepartmentSearch #txt
+Ph0 f8 dialogId com.axonivy.utils.persistence.demo.DepartmentSearch #txt
 Ph0 f8 startMethod start() #txt
 Ph0 f8 requestActionDecl '<> param;' #txt
 Ph0 f8 responseMappingAction 'out=in;
@@ -114,7 +114,7 @@ Ph0 f10 337 305 30 30 0 15 #rect
 Ph0 f11 280 320 337 320 #arcP
 Ph0 f12 actionTable 'out=in;
 ' #txt
-Ph0 f12 actionCode 'import com.axonivy.market.jpa.demo.service.PersonService;
+Ph0 f12 actionCode 'import com.axonivy.utils.persistence.demo.service.PersonService;
 
 
 PersonService.raiseSalaries();
@@ -148,7 +148,7 @@ Ph0 f14 @C|.responsibility Everybody #txt
 Ph0 f14 81 465 30 30 -21 17 #rect
 Ph0 f15 280 480 337 480 #arcP
 Ph0 f16 111 480 168 480 #arcP
->Proto Ph0 .type com.axonivy.market.jpa.demo.Data #txt
+>Proto Ph0 .type com.axonivy.utils.persistence.demo.Data #txt
 >Proto Ph0 .processKind NORMAL #txt
 >Proto Ph0 .xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>

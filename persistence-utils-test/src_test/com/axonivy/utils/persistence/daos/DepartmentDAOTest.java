@@ -1,4 +1,4 @@
-package com.axonivy.utils.persistence.test.daos;
+package com.axonivy.utils.persistence.daos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import com.axonivy.utils.persistence.demo.daos.DepartmentDAO;
 import com.axonivy.utils.persistence.demo.entities.Department;
-import com.axonivy.utils.persistence.test.test.DemoTestBase;
+import com.axonivy.utils.persistence.test.DemoTestBase;
 
 import ch.ivyteam.ivy.environment.IvyTest;
 

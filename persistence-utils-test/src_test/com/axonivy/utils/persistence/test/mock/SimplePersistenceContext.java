@@ -1,8 +1,8 @@
-package com.axonivy.utils.persistence.test.test.mock;
+package com.axonivy.utils.persistence.test.mock;
 
 import java.util.Map;
 
-import com.axonivy.utils.persistence.test.test.IvyEntityManager;
+import com.axonivy.utils.persistence.test.IvyEntityManager;
 
 import ch.ivyteam.ivy.process.data.persistence.IIvyEntityManager;
 import ch.ivyteam.ivy.process.data.persistence.IPersistenceContext;

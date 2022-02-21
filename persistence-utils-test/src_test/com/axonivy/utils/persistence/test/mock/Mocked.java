@@ -1,4 +1,4 @@
-package com.axonivy.utils.persistence.test.test.mock;
+package com.axonivy.utils.persistence.test.mock;
 
 public class Mocked {
 	public static SimplePersistenceContext persistenceContext;

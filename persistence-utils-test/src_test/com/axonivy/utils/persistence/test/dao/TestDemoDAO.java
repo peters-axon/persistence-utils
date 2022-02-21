@@ -1,7 +1,6 @@
-package com.axonivy.utils.persistence.test.test.dao;
+package com.axonivy.utils.persistence.test.dao;
 
-import com.axonivy.utils.persistence.test.dao.DemoDAO;
-import com.axonivy.utils.persistence.test.test.mock.SimplePersistenceContext;
+import com.axonivy.utils.persistence.test.mock.SimplePersistenceContext;
 
 
 public class TestDemoDAO extends DemoDAO {

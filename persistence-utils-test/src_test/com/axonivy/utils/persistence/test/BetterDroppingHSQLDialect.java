@@ -1,4 +1,4 @@
-package com.axonivy.utils.persistence.test.test;
+package com.axonivy.utils.persistence.test;
 
 import org.hibernate.dialect.HSQLDialect;
 

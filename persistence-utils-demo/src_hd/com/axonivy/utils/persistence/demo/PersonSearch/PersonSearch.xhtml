@@ -33,7 +33,7 @@
 								value="#{ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/info')}" />
 					</div>
 					<div class="ui-g-12 ui-md-12 ui-lg-10 right">
-						<p:commandButton actionListener="#{logic.editPerson(null)}" update="personDialog" 
+						<p:commandButton id="addButton" actionListener="#{logic.editPerson(null)}" update="personDialog" 
 								oncomplete="PF('personDialog').show()" icon="fa fa-plus" 
 								value="#{ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/addPerson')}" />
 					</div>
@@ -99,12 +99,12 @@
 								<h:panelGroup rendered="#{personTuple.get(9)}"><i class="fa fa-check" aria-hidden="true"/></h:panelGroup>
 							</p:column>
 							<p:column headerText="#{ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/edit')}" style="width: 2em; text-align:center">
-								<p:commandLink actionListener="#{logic.editPerson(personTuple.get(0))}" update="#{p:component('personDialog')}" oncomplete="PF('personDialog').show()">
+								<p:commandLink id="editButton" actionListener="#{logic.editPerson(personTuple.get(0))}" update="#{p:component('personDialog')}" oncomplete="PF('personDialog').show()">
 									<i class="fa fa-pencil" aria-hidden="true"></i>
 								</p:commandLink>
 							</p:column>
 							<p:column headerText="#{ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/delete')}" style="width: 2em; text-align:center">
-								<p:commandLink actionListener="#{logic.deletePerson(personTuple.get(0))}" update="mainForm">
+								<p:commandLink id="deleteButton" actionListener="#{logic.deletePerson(personTuple.get(0))}" update="mainForm">
 									<i class="fa fa-trash" aria-hidden="true"/>
 									<p:confirm header="#{ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/deleteHeader')}"
 										message="#{ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/deleteMessage', [personTuple.get(2), personTuple.get(3)])}"
@@ -124,7 +124,7 @@
 			<p:dialog id="personDialog" widgetVar="personDialog" modal="true" closable="true" closeOnEscape="true" width="50%" 
 					appendTo="@(body)" dynamic="true" 
 					header="#{ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/person')}">
-				<h:form>
+				<h:form id="personForm">
 					<div class="ui-g">
 						<div class="ui-g-12 ui-md-6 ui-lg-3">
 							<p:outputLabel for="ivyUserName" value="#{ivy.cms.co('/Dialogs/com/axonivy/demo/jpa_demo/core/PersonSearch/ivyUserName')}"/>
@@ -210,8 +210,8 @@
 			</p:dialog>
 			
 			<p:confirmDialog id="confirmDialog" global="true" showEffect="fade" hideEffect="fade">
-				<p:commandButton value="#{ivy.cms.co('/Labels/ok')}" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
-				<p:commandButton value="#{ivy.cms.co('/Labels/cancel')}" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+				<p:commandButton id="okButton" value="#{ivy.cms.co('/Labels/ok')}" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+				<p:commandButton id="cancelButton" value="#{ivy.cms.co('/Labels/cancel')}" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
 			</p:confirmDialog>
 		</ui:define>
 	</ui:composition>

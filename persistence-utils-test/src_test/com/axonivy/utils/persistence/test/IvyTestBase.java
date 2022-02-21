@@ -1,4 +1,4 @@
-package com.axonivy.utils.persistence.test.test;
+package com.axonivy.utils.persistence.test;
 
 import java.text.MessageFormat;
 import java.util.Collection;
@@ -29,8 +29,8 @@ import com.axonivy.persistence.util.IvyUtilities;
 import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.service.IvyService;
 import com.axonivy.utils.persistence.test.dao.TestDAO;
-import com.axonivy.utils.persistence.test.test.mock.Mocked;
-import com.axonivy.utils.persistence.test.test.mock.SimpleWorkflowSession;
+import com.axonivy.utils.persistence.test.mock.Mocked;
+import com.axonivy.utils.persistence.test.mock.SimpleWorkflowSession;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.environment.Ivy;

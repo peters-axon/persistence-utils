@@ -1,4 +1,4 @@
-package com.axonivy.utils.persistence.test.validation;
+package com.axonivy.utils.persistence.validation;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,9 +16,8 @@ import org.mockito.Mockito;
 import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.service.UiService;
 import com.axonivy.utils.persistence.demo.service.ValidationService;
-import com.axonivy.utils.persistence.test.test.DemoTestBase;
-import com.axonivy.utils.persistence.test.test.mock.Mocked;
-import com.axonivy.utils.persistence.validation.IvyNotNull;
+import com.axonivy.utils.persistence.test.DemoTestBase;
+import com.axonivy.utils.persistence.test.mock.Mocked;
 import com.axonivy.utils.persistence.validation.groups.Error;
 import com.axonivy.utils.persistence.validation.groups.Warning;
 

@@ -1,4 +1,4 @@
-package com.axonivy.utils.persistence.test.test.mock;
+package com.axonivy.utils.persistence.test.mock;
 
 import java.util.Date;
 import java.util.EnumSet;

@@ -1,4 +1,4 @@
-package com.axonivy.utils.persistence.test.daos;
+package com.axonivy.utils.persistence.daos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,8 +26,8 @@ import com.axonivy.utils.persistence.demo.entities.Person;
 import com.axonivy.utils.persistence.demo.enums.MaritalStatus;
 import com.axonivy.utils.persistence.demo.enums.PersonSearchField;
 import com.axonivy.utils.persistence.demo.service.DateService;
+import com.axonivy.utils.persistence.test.DemoTestBase;
 import com.axonivy.utils.persistence.test.service.TestService;
-import com.axonivy.utils.persistence.test.test.DemoTestBase;
 
 import ch.ivyteam.ivy.environment.IvyTest;
 

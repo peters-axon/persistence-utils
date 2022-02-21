@@ -1,4 +1,4 @@
-package com.axonivy.utils.persistence.test.test;
+package com.axonivy.utils.persistence.test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 
 import org.apache.log4j.Logger;
 
-import com.axonivy.utils.persistence.test.test.mock.NotMockedException;
+import com.axonivy.utils.persistence.test.mock.NotMockedException;
 
 import ch.ivyteam.ivy.process.data.persistence.IIvyEntityManager;
 import ch.ivyteam.ivy.process.data.persistence.IIvyQuery;

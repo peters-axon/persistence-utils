@@ -26,7 +26,7 @@ import com.codeborne.selenide.SelenideElement;
  * This DemoIntegrationTest WebTest will add a new department and a new person to that department.
  * Next step is to verify that the previously added entities are listed in the table.
  */
-@IvyWebTest(headless = false)
+@IvyWebTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DemoIntegrationTest {
 	private static String marketingDepartmentName;

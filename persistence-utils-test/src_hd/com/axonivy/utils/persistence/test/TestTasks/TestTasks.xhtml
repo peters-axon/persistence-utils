@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+	<ui:composition template="/layouts/frame-9.xhtml">
+		<ui:define name="title">TestTasks</ui:define>
+		<ui:define name="content">
+
+			<style>
+				.ui-outputlabel {
+					float: left;
+				}
+			</style>
+
+			<h3>Test Tasks</h3>
+
+			<h:form id="form">
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<p:messages></p:messages>
+					</div>
+				</div>
+
+				<p:separator />
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-4 ui-lg-7">
+						Prepare complete test environment.<br />
+						<ul>
+							<li>clean database and reload test data</li>
+							<li>create ivy users</li>
+						</ul>
+					</div>
+					<div class="ui-g-12 ui-md-4 ui-lg-3">
+						<p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank">
+							<p:outputLabel for="cleanReload" value="Clean DB (optional) and reload test data" />
+							<p:toggleSwitch id="cleanReload" value="#{data.cleanReload}" />
+						</p:panelGrid>
+					</div>
+					<div class="ui-g-12 ui-md-4 ui-lg-2">
+						<p:commandButton actionListener="#{logic.prepareTestEnvironment}" value="Prepare test environment" update="message">
+							<p:confirm header="Prepare test data?" message="Are you sure to prepare the test data?" icon="pi pi-exclamation-triangle" />
+						</p:commandButton>
+					</div>
+				</div>
+
+
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-8 ui-lg-10">
+						Export database to Excel.<br />
+					</div>
+					<div class="ui-g-12 ui-md-4 ui-lg-2">
+						<p:commandButton value="Export" ajax="false">
+							<p:fileDownload value="#{test.getDBExport()}"/>
+        				</p:commandButton>
+					</div>
+				</div>
+
+
+
+				<p:separator />
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h3>Messages</h3>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md12 ui-lg-12">
+						<p:inputTextarea id="message" value="#{data.message}" autoResize="true" readonly="true" style="width: 100%; color:blue;" />
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-8 ui-lg-10"></div>
+					<div class="ui-g-12 ui-md-4 ui-lg-2">
+						<p:commandButton actionListener="#{logic.close}" value="Proceed" update="form" icon="ui-icon-check" />
+					</div>
+				</div>
+
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Confirm" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="Cancel" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+				</p:confirmDialog>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

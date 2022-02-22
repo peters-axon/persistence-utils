@@ -1,0 +1,10 @@
+TestTasksData #class
+com.axonivy.utils.persistence.test.TestTasks #namespace
+message String #field
+message PERSISTENT #fieldModifier
+clean Boolean #field
+clean PERSISTENT #fieldModifier
+showErrorDetails Boolean #field
+showErrorDetails PERSISTENT #fieldModifier
+cleanReload Boolean #field
+cleanReload PERSISTENT #fieldModifier

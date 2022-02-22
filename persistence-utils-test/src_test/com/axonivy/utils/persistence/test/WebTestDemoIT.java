@@ -18,6 +18,8 @@ import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.engine.EngineUrl;
+import com.axonivy.ivy.webtest.primeui.PrimeUi;
+import com.axonivy.ivy.webtest.primeui.widget.InputNumber;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
@@ -26,9 +28,9 @@ import com.codeborne.selenide.SelenideElement;
  * This DemoIntegrationTest WebTest will add a new department and a new person to that department.
  * Next step is to verify that the previously added entities are listed in the table.
  */
-@IvyWebTest
+@IvyWebTest(headless = true)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class DemoIntegrationTest {
+public class WebTestDemoIT {
 	private static String marketingDepartmentName;
 	private static String productionDepartmentName;
 	private static String firstName;
@@ -44,6 +46,8 @@ public class DemoIntegrationTest {
 		firstName = "Peter" + randomNumber;
 		lastName = "S" + randomNumber;
 		ivyUserName = firstName.toLowerCase() + "." + lastName.toLowerCase();
+		
+		startLoginAsAdmin();
 	}
 	
 
@@ -128,7 +132,10 @@ public class DemoIntegrationTest {
 		
 		int index = indexOf("mainForm:personTable", ivyUserName);
 		$(By.id("mainForm:personTable:" + index + ":editButton")).shouldBe(enabled).click();
-
+		
+		InputNumber inputNumber = PrimeUi.inputNumber(By.id("personForm:salary"));
+		inputNumber.setValue("1112000");
+		
 		$(By.id("personForm:maritalStatus")).click();
 		$(By.id("personForm:maritalStatus_items")).$$(By.tagName("li")).find(text("widowed")).click();
 		$(By.id("personForm:maritalStatus")).click();
@@ -170,6 +177,14 @@ public class DemoIntegrationTest {
 
 	private void startProcessPersonSearch() {
 		open(EngineUrl.createProcessUrl("persistence-utils-demo/173A4BC5D38BAD52/personSearch.ivp"));
+	}
+
+	private static void startLoginAsAdmin() {
+		open(EngineUrl.create().toUrl() + "/faces/login.xhtml");
+
+		$(By.id("loginForm:userName")).shouldBe(enabled).sendKeys("jpa_admin");
+		$(By.id("loginForm:password")).shouldBe(enabled).sendKeys("jpa_admin");
+		$(By.id("loginForm:login")).shouldBe(enabled).click();
 	}
 
 	private static int indexOf(String tableId, String text) {

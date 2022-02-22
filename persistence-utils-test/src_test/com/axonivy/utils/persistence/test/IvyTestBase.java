@@ -17,7 +17,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.PropertyConfigurator;
-import org.hsqldb.util.DatabaseManagerSwing;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +27,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.axonivy.persistence.util.IvyUtilities;
 import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.service.IvyService;
-import com.axonivy.utils.persistence.test.dao.TestDAO;
 import com.axonivy.utils.persistence.test.mock.Mocked;
 import com.axonivy.utils.persistence.test.mock.SimpleWorkflowSession;
 
@@ -266,16 +264,6 @@ public class IvyTestBase {
 	 */
 	public PackageLevel[] packageLevelCombine(PackageLevel...levels) {
 		return levels;
-	}
-
-	/**
-	 * Start a GUI for the testing database.
-	 * 
-	 * @param testDao
-	 */
-	public void startDatabaseManagerSwing(TestDAO testDao) {
-		Object url = testDao.getEntityManagerProperty("hibernate.connection.url");
-		DatabaseManagerSwing.main(new String[] {"--url", url.toString(), "--noexit" });
 	}
 
 	/**

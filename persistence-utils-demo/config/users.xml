@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userConfig>
+    <user>
+        <username>jpa_admin</username>
+        <password>jpa_admin</password>
+        <role>Administrator</role>
+    </user>
+</userConfig>

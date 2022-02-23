@@ -1,0 +1,8 @@
+PersonSearchData #class
+com.axonivy.utils.persistence.demo.PersonSearch #namespace
+personId String #field
+personId PERSISTENT #fieldModifier
+secondSave Boolean #field
+secondSave PERSISTENT #fieldModifier
+personSearchBean com.axonivy.utils.persistence.demo.ui.PersonSearchBean #field
+personSearchBean PERSISTENT #fieldModifier

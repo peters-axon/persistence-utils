@@ -2,6 +2,4 @@
 
 [![CI Build](https://github.com/axonivy-market/persistence-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/persistence-utils/actions/workflows/ci.yml)
 
-"Persistence Utils"
-
-Read our [documentation](persistence-utils-product/README.md).
+Read our [Documentation](persistence-utils-product/README.md).

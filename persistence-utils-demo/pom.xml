@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.axonivy.utils.persistence</groupId>
   <artifactId>persistence-utils-demo</artifactId>
-  <version>9.3.1</version>
+  <version>9.3.2-SNAPSHOT</version>
   <packaging>iar</packaging>
   <properties>
     <axonivy.persistence.version>0.10.0</axonivy.persistence.version>

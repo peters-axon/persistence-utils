@@ -31,6 +31,10 @@
       <id>repo.axonivy.rocks</id>
       <url>https://repo.axonivy.rocks/</url>
     </repository>
+    <repository>
+      <id>repo.axonivy.public</id>
+      <url>https://maven.axonivy.com/</url>
+    </repository>
   </repositories>
   <build>
     <plugins>

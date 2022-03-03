@@ -28,6 +28,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "maven-dependency",
+      "data": {
+        "dependencies": [
+          {
+            "groupId": "com.axonivy.utils.persistence",
+            "artifactId": "persistence-utils",
+            "version": "${version}",
+            "type": "iar"
+          }
+        ],
+        "repositories": [
+          {
+            "id": "axonivy.public",
+            "url": "https://maven.axonivy.com",
+            "snapshots": {
+              "enabled": "true"
+            }
+          }
+        ]
+      }
     }
   ]
 }

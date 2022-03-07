@@ -6,6 +6,7 @@ Axon Ivy's JPA Persistence Lib utility helps you accelerate process automation i
 - Supports you with an easy-to-copy demo implementation to reduce your integration effort.
 
 ## Demo
+Note that the demo cannot be run in .iar mode. Therefore, Un-Pack both projects, persistence-utils and persistence-utils-demo, in your designer.
 
 Implemented features:
 - JPA Persistence Library 0.10.0

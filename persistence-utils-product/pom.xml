@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.axonivy.utils.persistence</groupId>
   <artifactId>persistence-utils-product</artifactId>
-  <version>9.3.3-SNAPSHOT</version>
+  <version>9.3.3</version>
   <packaging>pom</packaging>
 
   <build>

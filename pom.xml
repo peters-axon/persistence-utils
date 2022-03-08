@@ -3,7 +3,7 @@
   <groupId>com.axonivy.utils.persistence</groupId>
   <name>persistence-utils</name>
   <artifactId>persistence-utils-modules</artifactId>
-  <version>9.3.3-SNAPSHOT</version>
+  <version>9.3.3</version>
   <packaging>pom</packaging>
 
   <modules>
@@ -15,7 +15,7 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/axonivy-market/${project.name}.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v9.3.3</tag>
   </scm>
 
   <build>

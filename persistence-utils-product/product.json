@@ -42,7 +42,7 @@
         ],
         "repositories": [
           {
-            "id": "axonivy.public",
+            "id": "maven.axonivy.com",
             "url": "https://maven.axonivy.com",
             "snapshots": {
               "enabled": "true"

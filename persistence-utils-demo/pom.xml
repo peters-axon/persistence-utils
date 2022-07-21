@@ -5,15 +5,7 @@
   <artifactId>persistence-utils-demo</artifactId>
   <version>9.3.4-SNAPSHOT</version>
   <packaging>iar</packaging>
-  <properties>
-    <axonivy.persistence.version>0.10.0</axonivy.persistence.version>
-  </properties>
   <dependencies>
-    <dependency>
-      <groupId>com.axonivy.utils</groupId>
-      <artifactId>persistence-utils</artifactId>
-      <version>${axonivy.persistence.version}</version>
-    </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-jpamodelgen</artifactId>
@@ -26,12 +18,6 @@
       <type>iar</type>
     </dependency>
   </dependencies>
-  <repositories>
-    <repository>
-      <id>repo.axonivy.public</id>
-      <url>https://maven.axonivy.com/</url>
-    </repository>
-  </repositories>
   <build>
     <plugins>
       <plugin>

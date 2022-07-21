@@ -8,10 +8,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.axonivy.persistence.beans.AuditableEntity;
+import com.axonivy.utils.persistence.beans.AuditableEntity;
 import com.axonivy.utils.persistence.validation.IvyNotBlank;
 import com.axonivy.utils.persistence.validation.IvySizeMax;
 import com.axonivy.utils.persistence.validation.groups.SaveErrorGroup;
+
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(name = "UC_Department_name", columnNames = {"name"}))

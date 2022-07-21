@@ -1,7 +1,8 @@
 package com.axonivy.utils.persistence.demo.daos.markers;
 
-import com.axonivy.persistence.dao.markers.QueryMarker;
+import com.axonivy.utils.persistence.dao.markers.QueryMarker;
 import com.axonivy.utils.persistence.demo.enums.AccessRestriction;
+
 
 /**
  * Switch access restrictions on or off.

@@ -9,8 +9,8 @@ import javax.faces.application.FacesMessage.Severity;
 import org.apache.commons.lang.StringUtils;
 import org.primefaces.PrimeFaces;
 
-import com.axonivy.persistence.dao.QuerySettings;
-import com.axonivy.persistence.dao.markers.AuditableMarker;
+import com.axonivy.utils.persistence.dao.QuerySettings;
+import com.axonivy.utils.persistence.dao.markers.AuditableMarker;
 import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.daos.DepartmentDAO;
 import com.axonivy.utils.persistence.demo.entities.Department;

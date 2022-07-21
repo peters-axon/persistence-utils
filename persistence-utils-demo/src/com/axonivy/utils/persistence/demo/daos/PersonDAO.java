@@ -12,13 +12,11 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
 
-import com.axonivy.persistence.dao.AuditableDAO;
-import com.axonivy.persistence.dao.CriteriaQueryContext;
-import com.axonivy.persistence.dao.CriteriaQueryGenericContext;
-import com.axonivy.persistence.dao.ExpressionMap;
-import com.axonivy.persistence.dao.QuerySettings;
-import com.axonivy.persistence.search.AttributePredicates;
-import com.axonivy.persistence.search.FilterPredicate;
+import com.axonivy.utils.persistence.dao.AuditableDAO;
+import com.axonivy.utils.persistence.dao.CriteriaQueryContext;
+import com.axonivy.utils.persistence.dao.CriteriaQueryGenericContext;
+import com.axonivy.utils.persistence.dao.ExpressionMap;
+import com.axonivy.utils.persistence.dao.QuerySettings;
 import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.daos.markers.AccessMarker;
 import com.axonivy.utils.persistence.demo.entities.Person;
@@ -28,6 +26,8 @@ import com.axonivy.utils.persistence.demo.enums.PersonSearchField;
 import com.axonivy.utils.persistence.demo.ivy.HasCmsName;
 import com.axonivy.utils.persistence.demo.service.EnumService;
 import com.axonivy.utils.persistence.demo.service.IvyService;
+import com.axonivy.utils.persistence.search.AttributePredicates;
+import com.axonivy.utils.persistence.search.FilterPredicate;
 import com.axonivy.utils.persistence.demo.entities.Department_;
 import com.axonivy.utils.persistence.demo.entities.Person_;
 

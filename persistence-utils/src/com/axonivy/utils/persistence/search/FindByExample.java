@@ -2,6 +2,7 @@ package com.axonivy.utils.persistence.search;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -37,7 +38,7 @@ public class FindByExample<E extends GenericEntity<? extends Serializable>> {
 	 */
 	public static <E extends GenericEntity<?>> FindByExample<E> getInstance(Class<E> clazz){
 		try {
-			E newInstance = clazz.newInstance();
+			E newInstance = clazz.getDeclaredConstructor().newInstance();
 
 			Map<String, Field> fieldMap = ReflectionUtilitities.getFieldMap(clazz);
 			fieldMap.values().forEach(f->{ //remove boolean fields from findbyExample searches, they are often autoinitialized and cause the search not to work
@@ -46,7 +47,7 @@ public class FindByExample<E extends GenericEntity<? extends Serializable>> {
 				}
 			});
 			return new FindByExample<>(newInstance);
-		} catch (IllegalArgumentException | InstantiationException | IllegalAccessException e) {
+		} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			LOG.debug("getFindByExampleInstance could not create emptied example instance...",e);
 		}
 

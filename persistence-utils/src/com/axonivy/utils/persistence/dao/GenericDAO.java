@@ -1065,7 +1065,7 @@ public abstract class GenericDAO<M extends GenericEntity_, T extends GenericEnti
 	}
 
 	@SuppressWarnings("incomplete-switch")
-	private void handleUpdatingAudit(T tmpBean, T current, UpdateType updateType) throws InstantiationException, IllegalAccessException {
+	private void handleUpdatingAudit(T tmpBean, T current, UpdateType updateType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		Class<T> clazz = getType();
 
 		if (clazz.isAnnotationPresent(Audit.class)) {
@@ -1084,7 +1084,7 @@ public abstract class GenericDAO<M extends GenericEntity_, T extends GenericEnti
 		}
 	}
 
-	private void handleReadingAudit(CriteriaQueryGenericContext<?, ?> query) throws InstantiationException, IllegalAccessException {
+	private void handleReadingAudit(CriteriaQueryGenericContext<?, ?> query) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		Class<T> clazz = getType();
 		if (clazz.isAnnotationPresent(Audit.class)) {
 			AuditHandler handler = getAuditHandler(clazz);
@@ -1095,14 +1095,14 @@ public abstract class GenericDAO<M extends GenericEntity_, T extends GenericEnti
 	}
 
 	private AuditHandler getAuditHandler(Class<? extends GenericEntity<? extends Serializable>> clazz)
-			throws InstantiationException, IllegalAccessException {
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		AuditHandler handler = handlerMap.get(clazz);
 
 		if (handler == null) {
 			Audit auditAnotation = clazz.getAnnotation(Audit.class);
 			Class<? extends AuditHandler> handlerClass = auditAnotation.handler();
 			if (handlerClass != null) {
-				handler = handlerClass.newInstance();
+				handler = handlerClass.getDeclaredConstructor().newInstance();
 				handlerMap.put(clazz, handler);
 			}
 		}

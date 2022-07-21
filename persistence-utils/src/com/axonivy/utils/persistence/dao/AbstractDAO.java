@@ -1,6 +1,7 @@
 package com.axonivy.utils.persistence.dao;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1607,16 +1608,15 @@ public abstract class AbstractDAO implements BaseDAO {
 			Set<Class<?>> groups = new HashSet<>(Arrays.asList(ignoreGroups));
 
 			return cascadeCopy("CC: ", src, groups, new HashMap<>());
-		} catch (InstantiationException | IllegalAccessException e) {
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			throw new PersistenceException(e);
 		}
 	}
 
 	private <T> T cascadeCopy(String indent, T src, Set<Class<?>> ignoreGroups, Map<Object, Object> newObjectCache)
-			throws InstantiationException, IllegalAccessException {
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		// in case we get a proxy object, unproxy it to avoid creating new proxy
 		// instances (which confuses Hibernate).
-		@SuppressWarnings("unchecked")
 		T tmpSrc = unproxy(src);
 
 		// make a new instance only if we do not have one for this src already.
@@ -1629,7 +1629,7 @@ public abstract class AbstractDAO implements BaseDAO {
 
 			// new instance
 			@SuppressWarnings("unchecked")
-			T tmpDst = (T) srcClass.newInstance();
+			T tmpDst = (T) srcClass.getDeclaredConstructor().newInstance();
 			dst = tmpDst;
 			newObjectCache.put(tmpSrc, dst);
 
@@ -1787,7 +1787,7 @@ public abstract class AbstractDAO implements BaseDAO {
 
 	private <T> String copyIfCascade(String indent, Set<Class<?>> ignoreGroups, Map<Object, Object> newObjectCache,
 			T dst, Field f, Object value, CascadeType[] cascadeTypes)
-					throws IllegalAccessException, InstantiationException {
+					throws IllegalAccessException, InstantiationException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		String action;
 		if (isCascade(cascadeTypes)) {
 			// for cascade generate a deep copy

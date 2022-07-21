@@ -25,10 +25,11 @@ import org.dbunit.ext.hsqldb.HsqldbDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.internal.SessionImpl;
 
-import com.axonivy.persistence.beans.GenericEntity;
-import com.axonivy.persistence.beans.GenericEntity_;
-import com.axonivy.persistence.dao.GenericDAO;
+import com.axonivy.utils.persistence.beans.GenericEntity;
+import com.axonivy.utils.persistence.beans.GenericEntity_;
+import com.axonivy.utils.persistence.dao.GenericDAO;
 import com.axonivy.utils.persistence.demo.Logger;
+
 
 public abstract class TestDAO extends GenericDAO<GenericEntity_, GenericEntity<String>> {
 	private static final Logger LOG = Logger.getLogger(TestDAO.class);

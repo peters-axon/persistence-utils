@@ -24,7 +24,7 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.axonivy.persistence.util.IvyUtilities;
+import com.axonivy.utils.persistence.IvyUtilities;
 import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.service.IvyService;
 import com.axonivy.utils.persistence.test.mock.Mocked;

@@ -19,13 +19,13 @@ import org.dbunit.dataset.DataSetException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.axonivy.persistence.search.SearchFilter;
 import com.axonivy.utils.persistence.demo.daos.PersonDAO;
 import com.axonivy.utils.persistence.demo.entities.Department;
 import com.axonivy.utils.persistence.demo.entities.Person;
 import com.axonivy.utils.persistence.demo.enums.MaritalStatus;
 import com.axonivy.utils.persistence.demo.enums.PersonSearchField;
 import com.axonivy.utils.persistence.demo.service.DateService;
+import com.axonivy.utils.persistence.search.SearchFilter;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 import com.axonivy.utils.persistence.test.service.TestService;
 

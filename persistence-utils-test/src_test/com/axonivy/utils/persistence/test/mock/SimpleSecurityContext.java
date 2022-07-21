@@ -6,10 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.Callable;
-
-import javax.servlet.http.HttpServletRequest;
 
 import com.axonivy.utils.persistence.demo.Logger;
 

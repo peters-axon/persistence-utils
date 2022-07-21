@@ -36,8 +36,8 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.transaction.TransactionRolledbackException;
 
 import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.jpa.HibernateEntityManager;
 import org.hibernate.proxy.HibernateProxy;
 
 import com.axonivy.utils.persistence.IvyEntityManager;
@@ -74,12 +74,12 @@ public abstract class AbstractDAO implements BaseDAO {
 	}
 
 	/**
-	 * Convenience function to get {@link HibernateEntityManager}.
+	 * Convenience function to get {@link Session}.
 	 *
-	 * @return singleton EntityManager
+	 * @return singleton Session
 	 */
-	protected HibernateEntityManager getEM() {
-		return IvyEntityManager.getInstance().getIvyEntityManager(getPersistenceUnitName(), new HashMap<String, Object>());
+	protected Session getEM() {
+		return IvyEntityManager.getInstance().getHibernateSession(getPersistenceUnitName(), new HashMap<String, Object>());
 	}
 
 	/**
@@ -223,7 +223,7 @@ public abstract class AbstractDAO implements BaseDAO {
 				throw new TransactionRolledbackException("Transaction was rolled back");
 			}
 			if (count++ == 0) {
-				transaction = getEM().getSession().getTransaction();
+				transaction = getEM().getTransaction();
 				transaction.begin();
 				isActive = true;
 			}

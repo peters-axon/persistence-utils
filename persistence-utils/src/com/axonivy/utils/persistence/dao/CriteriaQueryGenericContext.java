@@ -175,7 +175,7 @@ public abstract class CriteriaQueryGenericContext<T extends Serializable, R exte
 	 * @return HQL string
 	 */
 	public String getQueryString(TypedQuery<?> query) {
-		return query.unwrap(org.hibernate.Query.class).getQueryString();
+		return query.unwrap(org.hibernate.query.Query.class).getQueryString();
 	}
 
 	/**
@@ -185,7 +185,7 @@ public abstract class CriteriaQueryGenericContext<T extends Serializable, R exte
 	 * @return comma separated parameters used in query
 	 */
 	public String getQueryParameters(TypedQuery<?> query) {
-		return StringUtils.join(query.unwrap(org.hibernate.Query.class).getNamedParameters(), ",");
+		return StringUtils.join(query.unwrap(org.hibernate.query.Query.class).getParameterMetadata().getNamedParameterNames(), ",");
 	}
 
 	public void setQuerySettings(QuerySettings<T> querySettings) {

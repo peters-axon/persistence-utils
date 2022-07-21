@@ -76,7 +76,7 @@ public class IvyUtilities {
 		List<IRole> result = null;
 		try {
 			result = asSystem(secCtx -> {
-				IRole role = secCtx.findRole(roleName);
+				IRole role = secCtx.roles().find(roleName);
 				return role != null ? role.getRoleMembers() : null;
 			});
 		} catch (Exception e) {

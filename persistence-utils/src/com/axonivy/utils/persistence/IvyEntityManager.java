@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.hibernate.jpa.HibernateEntityManager;
+import org.hibernate.Session;
 
 import com.axonivy.utils.persistence.dao.AutoCloseTransaction;
 import com.axonivy.utils.persistence.logging.Logger;
@@ -35,7 +35,7 @@ public class IvyEntityManager {
 	 */
 	private static class PersistenceContext {
 
-		private HibernateEntityManager hibernateEntityManager;
+		private Session hibernateSession;
 		private IIvyEntityManager iIvyEntityManager;
 
 		/**
@@ -48,17 +48,17 @@ public class IvyEntityManager {
 		}
 
 		/**
-		 * @return the hibernateEntityManager
+		 * @return the hibernateSession
 		 */
-		public HibernateEntityManager getHibernateEntityManager() {
-			return hibernateEntityManager;
+		public Session getHibernateSession() {
+			return hibernateSession;
 		}
 
 		/**
-		 * @param hibernateEntityManager the hibernateEntityManager to set
+		 * @param hibernateSession the hibernate Session to set
 		 */
-		public void setHibernateEntityManager(HibernateEntityManager hibernateEntityManager) {
-			this.hibernateEntityManager = hibernateEntityManager;
+		public void setHibernateSession(Session hibernateSession) {
+			this.hibernateSession = hibernateSession;
 		}
 
 		/**
@@ -137,22 +137,22 @@ public class IvyEntityManager {
 	}
 
 	/**
-	 * Get the {@link IvyEntityManager} for a specific persistence identifier.
+	 * Get the {@link Session} for a specific persistence identifier.
 	 *
 	 * @param persistenceIdentifier the persistence unit to use
 	 * @param properties a map use to create a new EntityManager
 	 * @return the registered entity manager
 	 */
-	public HibernateEntityManager getIvyEntityManager(String persistenceIdentifier, Map<?, ?> properties) {
+	public Session getHibernateSession(String persistenceIdentifier, Map<?, ?> properties) {
 		String callerContext = IvyUtilities.getProcessModelName();
 
 		PersistenceContext persistentContext = getPersistenceContext(callerContext, persistenceIdentifier);
 
-		HibernateEntityManager entityManager = persistentContext.getHibernateEntityManager();
+		Session session = persistentContext.getHibernateSession();
 
-		if (entityManager == null || !entityManager.isOpen()) {
+		if (session == null || !session.isOpen()) {
 			Map<?, ?> emProperties = properties == null ? new HashMap<>() : properties;
-			HibernateEntityManager oldEntityManager = entityManager;
+			Session oldSession = session;
 
 			IIvyEntityManager ivyEntityManager = persistentContext.getiIvyEntityManager();
 
@@ -162,17 +162,17 @@ public class IvyEntityManager {
 			}
 
 			// get a real entity manager from the ivy entity manager
-			entityManager = (HibernateEntityManager) ivyEntityManager.createEntityManager(emProperties);
-			if (oldEntityManager == null) {
-				LOG.debug("thread {0} created entity manager: {1}", Thread.currentThread().getId(), entityManager);
+			session = (Session) ivyEntityManager.createEntityManager(emProperties);
+			if (oldSession == null) {
+				LOG.debug("thread {0} created entity manager: {1}", Thread.currentThread().getId(), session);
 			} else {
 				LOG.debug("thread {0} recreated entity manager: {1} because the old entity manager: {2} was not open.",
-						Thread.currentThread().getId(), entityManager, oldEntityManager);
+						Thread.currentThread().getId(), session, oldSession);
 			}
-			persistentContext.setHibernateEntityManager(entityManager);
+			persistentContext.setHibernateSession(session);
 		}
 
-		return entityManager;
+		return session;
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class IvyEntityManager {
 	 * Note: This function never opens a session. A session is created by a call to
 	 * AbstractDAO#getEm() which is used by DAO functions. {@link #beginSession()}
 	 * and {link {@link #closeSession()} can be used to cleanup Sessions. When the
-	 * session count goes to zero, the {@link HibernateEntityManager} (or Session)
+	 * session count goes to zero, the {@link Session} (or Session)
 	 * will be closed automatically.
 	 * 
 	 * @return Autocloseable instance
@@ -200,7 +200,7 @@ public class IvyEntityManager {
 	/**
 	 * Remove one session from the session count.
 	 *
-	 * If there are no more sessions, then close the {@link HibernateEntityManager}.
+	 * If there are no more sessions, then close the {@link Session}.
 	 */
 	public void closeSession() {
 		Integer count = sessions.get();
@@ -221,15 +221,14 @@ public class IvyEntityManager {
 			if (persistenceContexts != null) {
 				for (Entry<String, PersistenceContext> entry : persistenceContexts.entrySet()) {
 					PersistenceContext persistenceContext = entry.getValue();
-					HibernateEntityManager entityManager = persistenceContext.getHibernateEntityManager();
-					if (entityManager != null && entityManager.isOpen()) {
-						entityManager.getSession().clear();
-						entityManager.clear();
-						entityManager.close();
+					Session session = persistenceContext.getHibernateSession();
+					if (session != null && session.isOpen()) {
+						session.clear();
+						session.close();
 					}
-					persistenceContext.setHibernateEntityManager(null);
+					persistenceContext.setHibernateSession(null);
 					LOG.debug("thread {0} context {1} closed entity manager: {2} because session nesting count was 0",
-							Thread.currentThread().getId(), entry.getKey(), entityManager);
+							Thread.currentThread().getId(), entry.getKey(), session);
 					closedEm = true;
 				}
 			}

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 
 /**
  * Generic entity used a base for all persistent objects.

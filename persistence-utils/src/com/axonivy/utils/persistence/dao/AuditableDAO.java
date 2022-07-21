@@ -156,7 +156,7 @@ public abstract class AuditableDAO<MetaDataGeneric extends AuditableEntity_, A e
 			bean = super.removeBean(oldBean);
 		} else {
 			bean.preRemove();
-			bean = getEM().merge(bean);
+			bean = (A) getEM().merge(bean);
 		}
 		return bean;
 	}

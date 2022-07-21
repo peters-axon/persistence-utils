@@ -3,8 +3,6 @@ package com.axonivy.utils.persistence.history.handler;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import ch.ivyteam.ivy.environment.Ivy;
-
 import com.axonivy.utils.persistence.StringUtilities;
 import com.axonivy.utils.persistence.beans.GenericEntity;
 import com.axonivy.utils.persistence.dao.CriteriaQueryGenericContext;
@@ -12,8 +10,9 @@ import com.axonivy.utils.persistence.enums.UpdateType;
 import com.axonivy.utils.persistence.history.beans.History;
 import com.axonivy.utils.persistence.history.beans.HistoryPK;
 import com.axonivy.utils.persistence.history.dao.HistoryDAO;
-import com.axonivy.utils.persistence.history.util.ClobUtil;
 import com.axonivy.utils.persistence.logging.Logger;
+
+import ch.ivyteam.ivy.environment.Ivy;
 
 /**
  * Abstract class for default audit handler. It creates default behaviors

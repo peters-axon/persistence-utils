@@ -150,7 +150,7 @@ public abstract class QueryGenericContext<T extends  Serializable> implements Au
 	 * @return HQL string
 	 */
 	public String getQueryString(Query query) {
-		return query.unwrap(org.hibernate.Query.class).getQueryString();
+		return query.unwrap(org.hibernate.query.Query.class).getQueryString();
 	}
 	
 	/**

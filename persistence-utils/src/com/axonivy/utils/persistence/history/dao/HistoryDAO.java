@@ -5,9 +5,6 @@ import java.util.List;
 
 import javax.persistence.criteria.Expression;
 
-import org.hibernate.criterion.Order;
-
-import com.axonivy.utils.persistence.beans.GenericEntity;
 import com.axonivy.utils.persistence.dao.CriteriaQueryContext;
 import com.axonivy.utils.persistence.dao.GenericDAO;
 import com.axonivy.utils.persistence.dao.QuerySettings;

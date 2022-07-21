@@ -1021,7 +1021,7 @@ public abstract class GenericDAO<M extends GenericEntity_, T extends GenericEnti
 				getEM().flush();
 				break;
 			case UPDATE:
-				tmpBean = getEM().merge(tmpBean);
+				tmpBean = (T) getEM().merge(tmpBean);
 				getEM().flush();
 				break;
 			case DELETE:
@@ -1114,7 +1114,7 @@ public abstract class GenericDAO<M extends GenericEntity_, T extends GenericEnti
 		T bean = oldBean;
 
 		bean = findInEM(getType(), bean.getId());
-		bean = getEM().merge(bean);
+		bean = (T) getEM().merge(bean);
 		getEM().remove(bean);
 
 		return bean;
@@ -1313,7 +1313,7 @@ public abstract class GenericDAO<M extends GenericEntity_, T extends GenericEnti
 	 * @return The Filter instance representing the enabled filter.
 	 */
 	public Filter enableFilter(String filterName) {
-		Session session = getEM().getSession();
+		Session session = getEM();
 
 		return session.enableFilter(filterName);
 	}

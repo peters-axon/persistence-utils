@@ -3,7 +3,7 @@
   <groupId>com.axonivy.utils.persistence</groupId>
   <name>persistence-utils</name>
   <artifactId>persistence-utils-modules</artifactId>
-  <version>9.3.0-SNAPSHOT</version>
+  <version>9.3.4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>

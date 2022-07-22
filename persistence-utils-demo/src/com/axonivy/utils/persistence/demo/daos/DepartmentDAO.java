@@ -2,11 +2,12 @@ package com.axonivy.utils.persistence.demo.daos;
 
 import javax.persistence.criteria.Expression;
 
-import com.axonivy.persistence.dao.AuditableDAO;
-import com.axonivy.persistence.dao.CriteriaQueryContext;
-import com.axonivy.persistence.dao.QuerySettings;
+import com.axonivy.utils.persistence.dao.AuditableDAO;
+import com.axonivy.utils.persistence.dao.CriteriaQueryContext;
+import com.axonivy.utils.persistence.dao.QuerySettings;
 import com.axonivy.utils.persistence.demo.entities.Department;
 import com.axonivy.utils.persistence.demo.entities.Department_;
+
 
 public class DepartmentDAO extends AuditableDAO<Department_, Department> implements BaseDAO {
 	private static final DepartmentDAO instance = new DepartmentDAO(); 

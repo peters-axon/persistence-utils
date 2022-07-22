@@ -24,7 +24,7 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.axonivy.persistence.util.IvyUtilities;
+import com.axonivy.utils.persistence.IvyUtilities;
 import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.service.IvyService;
 import com.axonivy.utils.persistence.test.mock.Mocked;
@@ -33,6 +33,7 @@ import com.axonivy.utils.persistence.test.mock.SimpleWorkflowSession;
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.IRole;
+import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 
@@ -446,4 +447,18 @@ public class IvyTestBase {
 					assertError);
 		}
 	}
+
+	public void createUser(String ivyUserName, String firstName, String lastName, String password) {
+		ISecurityContext securityContext = Ivy.wf().getApplication().getSecurityContext();
+
+		LOG.info("Creating user {0}", ivyUserName);
+		IUser user = securityContext.createUser(
+				ivyUserName,
+				String.format("%s %s", firstName, lastName),
+				password,
+				null,
+				String.format("%s.%s@demo.axonivy.com", firstName, lastName),
+				null);
+	}
+
 }

@@ -12,8 +12,8 @@ import javax.validation.Constraint;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 
-import com.axonivy.persistence.dao.QuerySettings;
-import com.axonivy.persistence.dao.markers.AuditableMarker;
+import com.axonivy.utils.persistence.dao.QuerySettings;
+import com.axonivy.utils.persistence.dao.markers.AuditableMarker;
 import com.axonivy.utils.persistence.demo.daos.PersonDAO;
 import com.axonivy.utils.persistence.demo.entities.Person;
 import com.axonivy.utils.persistence.validation.ConstraintValidatorAdapter;

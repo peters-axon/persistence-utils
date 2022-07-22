@@ -1,6 +1,7 @@
 package com.axonivy.utils.persistence.test.dao;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,10 +26,11 @@ import org.dbunit.ext.hsqldb.HsqldbDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.internal.SessionImpl;
 
-import com.axonivy.persistence.beans.GenericEntity;
-import com.axonivy.persistence.beans.GenericEntity_;
-import com.axonivy.persistence.dao.GenericDAO;
+import com.axonivy.utils.persistence.beans.GenericEntity;
+import com.axonivy.utils.persistence.beans.GenericEntity_;
+import com.axonivy.utils.persistence.dao.GenericDAO;
 import com.axonivy.utils.persistence.demo.Logger;
+
 
 public abstract class TestDAO extends GenericDAO<GenericEntity_, GenericEntity<String>> {
 	private static final Logger LOG = Logger.getLogger(TestDAO.class);
@@ -70,7 +72,7 @@ public abstract class TestDAO extends GenericDAO<GenericEntity_, GenericEntity<S
 	public DatabaseConnection getDatabaseConnection(boolean autoCommit) {
 		Connection connection;
 		try {
-			connection = ((SessionImpl) getEM().getSession()).connection();
+			connection = ((SessionImpl) getEM()).connection();
 			connection.setAutoCommit(autoCommit);
 			DatabaseConnection conn = new DatabaseConnection(connection);
 			configureDatabaseConnection(conn);
@@ -113,6 +115,27 @@ public abstract class TestDAO extends GenericDAO<GenericEntity_, GenericEntity<S
 		}
 
 		XlsDataSet.write(dataSet, oStream);
+	}
+
+	/**
+	 * Export one or more tables to Excel.
+	 * 
+	 * @param fileName Excel filename, extension xls
+	 * @param tables table name (i.e. typically {@link Class#getSimpleName()}
+	 * @throws DataSetException
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public void exportTablesToExcel(String fileName, String...tables) throws DataSetException, FileNotFoundException, IOException {
+		DatabaseConnection connection = getDatabaseConnection();
+		connection.getConfig().setProperty(DatabaseConfig.FEATURE_QUALIFIED_TABLE_NAMES, true);
+
+		QueryDataSet dataSet = new QueryDataSet(connection);
+		for (String table : tables) {
+			dataSet.addTable(table);
+		}
+
+		XlsDataSet.write(dataSet, new FileOutputStream(fileName));
 	}
 
 	/**

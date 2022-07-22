@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.axonivy.persistence.beans.AuditableEntity;
+import com.axonivy.utils.persistence.beans.AuditableEntity;
 import com.axonivy.utils.persistence.demo.enums.MaritalStatus;
 import com.axonivy.utils.persistence.demo.validation.ValidIvyUserName;
 import com.axonivy.utils.persistence.demo.validation.ValidUniqueIvyUserName;
@@ -22,6 +22,7 @@ import com.axonivy.utils.persistence.validation.IvyNotNull;
 import com.axonivy.utils.persistence.validation.IvySizeMax;
 import com.axonivy.utils.persistence.validation.groups.SaveErrorGroup;
 import com.axonivy.utils.persistence.validation.groups.SaveWarnGroup;
+
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(name = "UC_Person_ivyUserName", columnNames = {"ivyUserName"}))

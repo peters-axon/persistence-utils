@@ -17,6 +17,7 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.user.NewUser;
 
 
 /**
@@ -63,13 +64,11 @@ public class PersonService {
 				Department dpmnt = person.getDepartment();
 				String dpmntName = dpmnt != null ? dpmnt.getName() : "no department";
 				LOG.info("Creating user {0}", ivyUserName);
-				user = securityContext.createUser(
-						ivyUserName,
-						String.format("%s %s (%s)", person.getFirstName(), person.getLastName(), dpmntName),
-						"password",
-						null,
-						String.format("%s.%s@demo.axonivy.com", person.getFirstName(), person.getLastName()),
-						null);
+				user = securityContext.users().create(
+						NewUser.create(ivyUserName)
+							.fullName(String.format("%s %s (%s)", person.getFirstName(), person.getLastName(), dpmntName))
+							.password("password")
+							.mailAddress(String.format("%s.%s@demo.axonivy.com", person.getFirstName(), person.getLastName())).toNewUser());
 
 				user.addRole(userRole);
 			}
@@ -77,7 +76,7 @@ public class PersonService {
 		else {
 			if(user != null) {
 				LOG.info("Deleting user {0}", ivyUserName);
-				securityContext.deleteUser(ivyUserName);
+				securityContext.users().delete(ivyUserName);
 			}
 		}
 	}

@@ -5,14 +5,10 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Date;
 
-import com.axonivy.utils.persistence.demo.Logger;
 
 public class DateService {
-	private static final Logger LOG = Logger.getLogger(DateService.class);
-
-
-	private DateService() {
-	}
+	
+	private DateService() {}
 
 	/**
 	 * Convert a {@link Date} to a {@link LocalDate}.

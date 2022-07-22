@@ -51,7 +51,7 @@ public class SimpleSecurityContext implements ISecurityContext {
 
 	public IRole removeSimpleRole(String rolename) {
 		IRole role = rolesMap.remove(rolename);
-		if(role.getParent() != null) {
+		if(role != null && role.getParent() != null) {
 			((SimpleRole)role.getParent()).removeChildRole(role);
 		}
 		if(role != null) {

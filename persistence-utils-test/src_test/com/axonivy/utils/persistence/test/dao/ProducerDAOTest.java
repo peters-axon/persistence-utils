@@ -122,7 +122,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		producerDAO.save(createFakeData());
 		try (CriteriaQueryGenericContext<Producer, Tuple> q = producerDAO.initializeQuery(Producer.class,
 				Tuple.class)) {
-			Expression<String> path1 = producerDAO.getExpression(null, q.r, Producer_.name);
+			Expression<String> path1 = ProducerDAO.getExpression(null, q.r, Producer_.name);
 			q.q.where(q.c.like(path1, "axon"));
 			q.q.multiselect(path1);
 			List<Tuple> tuples = producerDAO.findByCriteria(q);

@@ -7,11 +7,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.ivy.HasCmsName;
 
+
 public class EnumService {
-	private static final Logger LOG = Logger.getLogger(EnumService.class);
 
 	private EnumService() {}
 

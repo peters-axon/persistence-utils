@@ -1,9 +1,7 @@
 package com.axonivy.utils.persistence.test.dao;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ import javax.persistence.criteria.Expression;
 import javax.transaction.TransactionRolledbackException;
 
 import org.hamcrest.core.IsNull;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -71,9 +70,9 @@ public class ProductDAOTest extends DemoTestBase {
 			assertEquals(expect, actual);
 			productDAO.deleteAll(products);
 		} catch (NullPointerException e) {
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		} catch (TransactionRolledbackException e) {
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		}
 	}
 
@@ -89,9 +88,9 @@ public class ProductDAOTest extends DemoTestBase {
 
 			assertEquals(expect, actual);
 		} catch (NullPointerException e) {
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		} catch (TransactionRolledbackException e) {
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		}
 	}
 
@@ -102,11 +101,11 @@ public class ProductDAOTest extends DemoTestBase {
 			products = productDAO.saveAll(products);
 		} catch (NullPointerException e) {
 			System.out.println("NullPointerException: " + e.getMessage());
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 
 		} catch (TransactionRolledbackException e) {
 			System.out.println("TransactionRolledbackException: " + e.getMessage());
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		}
 	}
 
@@ -125,13 +124,13 @@ public class ProductDAOTest extends DemoTestBase {
 	@Test
 	public void testFindProductWithNullData() {
 		Product product = productDAO.find(null);
-		assertThat(product, is(IsNull.nullValue()));
+		Assert.assertNull(product);
 	}
 
 	@Test
 	public void testFindProductWithEmptyData() {
 		Product product = productDAO.find(new Product());
-		assertThat(product, is(IsNull.nullValue()));
+		Assert.assertNull(product);
 	}
 
 	@Test
@@ -220,7 +219,7 @@ public class ProductDAOTest extends DemoTestBase {
 	@Test
 	public void testDeleteProductWithNullData() {
 		Product actual = productDAO.delete(null);
-		assertThat(actual, is(IsNull.nullValue()));
+		Assert.assertNull(actual);
 	}
 
 	// deleteAll	
@@ -243,9 +242,9 @@ public class ProductDAOTest extends DemoTestBase {
 			assertEquals(0, actual);
 			productDAO.deleteAll(products);
 		} catch (NullPointerException e) {
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		} catch (TransactionRolledbackException e) {
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		}
 	}
 
@@ -254,7 +253,7 @@ public class ProductDAOTest extends DemoTestBase {
 		try {
 			productDAO.deleteAll(null);
 		} catch (NullPointerException e) {
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		}
 	}
 
@@ -278,7 +277,7 @@ public class ProductDAOTest extends DemoTestBase {
 		try {
 			productDAO.findBySearchFilter(null);
 		} catch (NullPointerException e) {
-			assertThat(e.getMessage(), is(IsNull.nullValue()));
+			Assert.assertNull(e.getMessage(), IsNull.nullValue());
 		}
 	}
 
@@ -413,7 +412,7 @@ public class ProductDAOTest extends DemoTestBase {
 		List<Product> products = productDAO.saveAll(this.getProducts());
 		try (CriteriaQueryGenericContext<Product, Tuple> q = productDAO.initializeQuery(Product.class, Tuple.class)) {
 
-			Expression<String> path = productDAO.getExpression(null, q.r, Product_.name);
+			Expression<String> path = ProductDAO.getExpression(null, q.r, Product_.name);
 			q.q.where(q.c.like(path, "%Samsung%"));
 			q.q.multiselect(path);
 			List<Tuple> tuples = productDAO.findByCriteria(q);
@@ -433,7 +432,7 @@ public class ProductDAOTest extends DemoTestBase {
 				CriteriaQueryGenericContext<Product, Long> countQueryContext = productDAO.initializeQuery(Product.class,
 						Long.class);) {
 
-			Expression<String> path = productDAO.getExpression(null, q.r, Product_.name);
+			Expression<String> path = ProductDAO.getExpression(null, q.r, Product_.name);
 			q.q.where(q.c.like(path, "%Samsung%"));
 			q.q.multiselect(path);
 			List<Tuple> tuples = productDAO.findByCriteria(q);
@@ -446,26 +445,6 @@ public class ProductDAOTest extends DemoTestBase {
 		}
 		productDAO.deleteAll(products);
 	}
-
-	//  countBySearchFilter(searchFilter, querySettings)
-
-	//	@Test
-	//	public void testCountProductBySearchFilterWithQuerySettings() throws TransactionRolledbackException {
-	//
-	//		List<Product> products = productDAO.saveAll(this.getProducts());
-	//
-	//		SearchFilter searchFilter = new SearchFilter().add(IvyPersistanceSearchField.FILTER_NAME_PRODUCT);
-	//
-	//		long actual = productDAO.countBySearchFilter(searchFilter,
-	//				new QuerySettings<Product>().withFirstResult(0).withMaxResults(2));
-	//
-	//		List<Tuple> result = productDAO.findBySearchFilter(searchFilter,
-	//				new QuerySettings<Product>().withFirstResult(0).withMaxResults(2));
-	//
-	//		productDAO.deleteAll(products);
-	//		assertEquals(result.size(), actual);
-	//
-	//	}
 
 	@Test
 	public void testDeleteWithoutAuditing() throws TransactionRolledbackException {
@@ -507,7 +486,6 @@ public class ProductDAOTest extends DemoTestBase {
 		products.add(product4);
 
 		return products;
-
 	}
 
 	private Product getProduct() {
@@ -517,7 +495,6 @@ public class ProductDAOTest extends DemoTestBase {
 		product.setPrice(1300);
 
 		return product;
-
 	}
 
 }

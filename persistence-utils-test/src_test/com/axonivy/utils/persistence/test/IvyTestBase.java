@@ -35,6 +35,7 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.user.NewUser;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 
 
@@ -452,13 +453,11 @@ public class IvyTestBase {
 		ISecurityContext securityContext = Ivy.wf().getApplication().getSecurityContext();
 
 		LOG.info("Creating user {0}", ivyUserName);
-		IUser user = securityContext.createUser(
-				ivyUserName,
-				String.format("%s %s", firstName, lastName),
-				password,
-				null,
-				String.format("%s.%s@demo.axonivy.com", firstName, lastName),
-				null);
+		securityContext.users().create(NewUser.create(ivyUserName)
+				.fullName(String.format("%s %s", firstName, lastName))
+				.password(password)
+				.mailAddress(String.format("%s.%s@demo.axonivy.com", firstName, lastName))
+				.toNewUser());
 	}
 
 }

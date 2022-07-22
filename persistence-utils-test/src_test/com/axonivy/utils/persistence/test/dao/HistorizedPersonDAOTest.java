@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.log4j.Level;
 import org.dbunit.dataset.DataSetException;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,14 +18,12 @@ import com.axonivy.utils.persistence.daos.HistorizedPersonDAO;
 import com.axonivy.utils.persistence.entities.HistorizedPerson;
 import com.axonivy.utils.persistence.history.beans.History;
 import com.axonivy.utils.persistence.history.dao.HistoryDAO;
-import com.axonivy.utils.persistence.logging.Logger;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
 
 @RunWith(PowerMockRunner.class)
 public class HistorizedPersonDAOTest extends DemoTestBase {
 	private static final HistorizedPersonDAO DAO = HistorizedPersonDAO.getInstance();
-	private static final Logger LOG = Logger.getLogger(HistorizedPersonDAOTest.class);
 
 	@Before
 	public void prepare() throws DataSetException, FileNotFoundException, IOException  {

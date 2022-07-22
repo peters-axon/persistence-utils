@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
     <wb-module deploy-name="persistence-utils-test">
+                
         <wb-resource deploy-path="/" source-path="/webContent" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src_hd"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src_wsproc"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src_dataClasses"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/.apt_generated"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated_tests"/>
+                
         <property name="context-root" value="persistence-utils-test"/>
+                
         <property name="java-output-path" value="/persistence-utils-test/target/classes"/>
+            
     </wb-module>
+    
 </project-modules>

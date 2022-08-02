@@ -6,6 +6,6 @@ package com.axonivy.utils.persistence.daos;
 public interface BaseDAO extends com.axonivy.utils.persistence.dao.BaseDAO {
 	@Override
 	default public String getPersistenceUnitName() {
-		return "persistence_test";
+		return "jpa_demo_test";
 	}
 }

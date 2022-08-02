@@ -6,7 +6,7 @@ public class AuditHandler extends DefaultAbstractAuditHandler {
 
 	@Override
 	public String getHandlerPersistenceUnitName() {
-		return "persistence_test";
+		return "jpa_demo_test";
 	}
 
 }

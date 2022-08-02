@@ -14,7 +14,6 @@ import org.dbunit.DatabaseUnitException;
 import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.entities.Department;
 import com.axonivy.utils.persistence.demo.entities.Person;
-import com.axonivy.utils.persistence.demo.service.PersonService;
 import com.axonivy.utils.persistence.test.dao.DemoDAO;
 
 public class TestService {
@@ -51,8 +50,6 @@ public class TestService {
 		try {
 			loadStandardTestData(clean);
 			result += "Loaded test data " +  (clean ? "whith" : "without") + " cleaning." + NL;
-			PersonService.syncUsers();
-			result += "Synced Ivy users" + NL;
 		} catch (Exception e) {
 			result += "Preparing test enviroment caused exception." + NL + ExceptionUtils.getStackTrace(e);
 			if(throwException) {

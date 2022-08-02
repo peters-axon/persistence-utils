@@ -3,15 +3,10 @@ package com.axonivy.utils.persistence.test.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
-import org.dbunit.dataset.DataSetException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.axonivy.utils.persistence.StringUtilities;
 import com.axonivy.utils.persistence.daos.HistorizedPersonDAO;
@@ -20,18 +15,22 @@ import com.axonivy.utils.persistence.history.beans.History;
 import com.axonivy.utils.persistence.history.dao.HistoryDAO;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 
-@RunWith(PowerMockRunner.class)
+
+@IvyTest
 public class HistorizedPersonDAOTest extends DemoTestBase {
 	private static final HistorizedPersonDAO DAO = HistorizedPersonDAO.getInstance();
 
-	@Before
-	public void prepare() throws DataSetException, FileNotFoundException, IOException  {
+	
+	@BeforeEach
+	public void prepare() throws Exception {
 		switchToSystemUser();
-		//prepareTestDataAndMocking(true);
+		prepareTestDataAndMocking(true);
 	}
 
-	@Test
+
+	//@Test
 	public void testHistory() {
 		HistoryDAO historyDAO = new HistoryDAO(DAO.getPersistenceUnitName());
 		

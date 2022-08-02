@@ -1,13 +1,7 @@
 package com.axonivy.utils.persistence.test.dao;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import org.dbunit.dataset.DataSetException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.axonivy.utils.persistence.dao.QuerySettings;
 import com.axonivy.utils.persistence.daos.CarDAO;
@@ -15,13 +9,15 @@ import com.axonivy.utils.persistence.entities.Car;
 import com.axonivy.utils.persistence.entities.Car_;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 
-@RunWith(PowerMockRunner.class)
+
+@IvyTest
 public class CarDAOTest extends DemoTestBase {
 	private static final CarDAO carDAO = CarDAO.getInstance();
 
-	@Before
-	public void prepare() throws DataSetException, FileNotFoundException, IOException  {
+	@BeforeEach
+	public void prepare() throws Exception {
 		switchToSystemUser();
 		prepareTestDataAndMocking(true);
 	}

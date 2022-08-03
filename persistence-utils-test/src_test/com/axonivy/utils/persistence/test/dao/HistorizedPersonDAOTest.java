@@ -1,7 +1,6 @@
 package com.axonivy.utils.persistence.test.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -48,23 +47,25 @@ public class HistorizedPersonDAOTest extends DemoTestBase {
 		historizedPerson2 = DAO.save(historizedPerson2);
 		
 		List<History> result = historyDAO.findByTypeAndId(HistorizedPerson.class, historizedPerson2.getId());
-		assertTrue("found no history entry", result.size() == 0);
+		assertThat(result).as("Found no history entry").isEmpty();
 		
 		historizedPerson2.setLastName("Binder");
 		historizedPerson2 = DAO.save(historizedPerson2);
 		
 		result = historyDAO.findByTypeAndId(HistorizedPerson.class, historizedPerson2.getId());
-		assertTrue("found exactly one history entry", result.size() == 1);
+		assertThat(result).as("Found exactly one history entry").hasSize(1);
 		
 		result = historyDAO.findByTypeAndId(HistorizedPerson.class, historizedPerson.getId());
-		assertTrue("found exactly one history entry", result.size() == 1);
+		assertThat(result).as("Found exactly one history entry").hasSize(1);
 		
 		DAO.delete(historizedPerson);
 		result = historyDAO.findByTypeAndId(HistorizedPerson.class, historizedPerson.getId());
-		
-		assertTrue("found exactly two history entries", result.size() == 2);		
-		assertEquals("name of history entries match", "Mayer", StringUtilities.fromJSONToObject(result.get(1).getJsonData(), HistorizedPerson.class).getLastName());
-		assertEquals("name of history entries match", "Maier", StringUtilities.fromJSONToObject(result.get(0).getJsonData(), HistorizedPerson.class).getLastName());
+
+		assertThat(result).as("Found exactly two history entries").hasSize(2);
+		assertThat(StringUtilities.fromJSONToObject(result.get(1).getJsonData(), HistorizedPerson.class).getLastName())
+			.as("Name of history entries match").isEqualTo("Mayer");
+		assertThat(StringUtilities.fromJSONToObject(result.get(0).getJsonData(), HistorizedPerson.class).getLastName())
+			.as("Name of history entries match").isEqualTo("Maier");
 		
 		//switchOnLogging(Level.INFO, packageLevelHibernateFull());
 		/*result.forEach(history -> {

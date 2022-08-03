@@ -1,10 +1,7 @@
 package com.axonivy.utils.persistence.test.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.PersistenceException;
@@ -12,7 +9,7 @@ import javax.persistence.Tuple;
 import javax.transaction.TransactionRolledbackException;
 
 import org.apache.log4j.Level;
-import org.dbunit.dataset.DataSetException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +20,10 @@ import com.axonivy.utils.persistence.enums.PersonSearchField;
 import com.axonivy.utils.persistence.search.SearchFilter;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 
+
+@IvyTest
 public class PersonDAOTest extends DemoTestBase {
 	private static final PersonDAO personDAO = PersonDAO.getInstance();
 	private static final String userLeitung = "gera.dewegs";
@@ -66,8 +66,8 @@ public class PersonDAOTest extends DemoTestBase {
 		}
 	}
 
-	@Test
-	public void testData() throws DataSetException, FileNotFoundException, IOException {
+	//@Test
+	public void testData() throws Exception {
 		LOG.info("Writig Excel file");
 		testDemoDao.exportTablesToExcel("C:/Temp/exported.xls", Person.class.getSimpleName(), Department.class.getSimpleName());
 		LOG.info("Wrote Excel file");
@@ -164,7 +164,7 @@ public class PersonDAOTest extends DemoTestBase {
 
 		try {
 			personDAO.save(person);
-			fail("Expected " + PersistenceException.class.getSimpleName() + " while saving person with duplicate ivy username");
+			Assertions.fail("Expected " + PersistenceException.class.getSimpleName() + " while saving person with duplicate ivy username");
 		} catch(PersistenceException e) {
 			LOG.info("Found expected Exception: {0}", e.getMessage());
 		}
@@ -177,7 +177,7 @@ public class PersonDAOTest extends DemoTestBase {
 		try {
 			person.setIvyUserName("duplicatename");
 			person = personDAO.save(person);
-			fail("Expected " + PersistenceException.class.getSimpleName() + " while updating person with duplicate ivy username");
+			Assertions.fail("Expected " + PersistenceException.class.getSimpleName() + " while updating person with duplicate ivy username");
 		} catch(PersistenceException e) {
 			LOG.info("Found expected Exception: {0}", e.getMessage());
 		}

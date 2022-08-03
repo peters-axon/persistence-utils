@@ -213,7 +213,8 @@ public class ProducerDAOTest extends DemoTestBase {
 		Producer producer = new Producer();
 		producer = producerDAO.save(createFakeData());
 		producer = producerDAO.deleteWithoutAuditing(producer);
-		assertThat(producer.isDeleted()).as("Deleted producer").isTrue();
+		producer = producerDAO.find(producer);
+		assertThat(producer).as("Deleted producer").isNull();
 	}
 
 	@Test

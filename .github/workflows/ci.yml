@@ -5,7 +5,44 @@ on:
   schedule:
     - cron:  '21 21 * * *'
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      mvnArgs:
+        type: string
+        required: false
+    secrets:
+      mvnArgs:
+        required: false
 
 jobs:
   build:
-    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v1
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.4.3
+      with:
+        java-version: 11
+
+    - name: Build persistence-utils Jar
+      run: mvn clean install --batch-mode -f persistence-utils/pom.xml ${{ inputs.mvnArgs }} ${{ secrets.mvnArgs }}
+
+    - name: Build with Maven
+      run: mvn clean verify --batch-mode ${{ inputs.mvnArgs }} ${{ secrets.mvnArgs }}
+
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
+      with:
+        files: |
+          */target/*-reports/*.xml
+          !*/target/*-reports/failsafe-summary.xml
+
+    - name: Archive build artifact
+      uses: actions/upload-artifact@v2
+      with:
+        path: |
+          */target/*.iar
+          *product/target/*.zip

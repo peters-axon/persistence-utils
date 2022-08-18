@@ -6,13 +6,13 @@
   <version>9.3.4-SNAPSHOT</version>
   <packaging>iar</packaging>
   <dependencies>
-  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen -->
-  <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-jpamodelgen</artifactId>
-    <version>5.4.21.Final</version>
-    <scope>provided</scope>
-  </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-jpamodelgen</artifactId>
+      <version>5.4.21.Final</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -21,6 +21,24 @@
         <artifactId>project-build-plugin</artifactId>
         <version>9.3.1</version>
         <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>jar.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

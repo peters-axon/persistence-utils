@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="jpa_demo_test">
-        <class>com.axonivy.utils.persistence.demo.entities.Department</class>
-        <class>com.axonivy.utils.persistence.demo.entities.Person</class>
+        <class>com.axonivy.utils.persistence.entities.Car</class>
+        <class>com.axonivy.utils.persistence.entities.Department</class>
+        <class>com.axonivy.utils.persistence.entities.HistorizedPerson</class>
+        <class>com.axonivy.utils.persistence.entities.Person</class>
+        <class>com.axonivy.utils.persistence.entities.Producer</class>
+        <class>com.axonivy.utils.persistence.entities.Product</class>
+        <class>com.axonivy.utils.persistence.entities.Vehicle</class>
+        <class>com.axonivy.utils.persistence.history.beans.History</class>
+        <class>com.axonivy.utils.persistence.history.beans.HistoryPK</class>
         <properties>
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
             <property name="hibernate.connection.username" value="sa"/>

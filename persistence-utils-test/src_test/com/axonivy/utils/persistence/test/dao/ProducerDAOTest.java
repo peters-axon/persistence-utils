@@ -1,7 +1,6 @@
 package com.axonivy.utils.persistence.test.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,9 +15,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.transaction.TransactionRolledbackException;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.Test;
 
 import com.axonivy.utils.persistence.dao.CascadeDelete;
 import com.axonivy.utils.persistence.dao.CriteriaQueryGenericContext;
@@ -30,8 +27,10 @@ import com.axonivy.utils.persistence.entities.Product;
 import com.axonivy.utils.persistence.search.FindByExample;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 
-@RunWith(PowerMockRunner.class)
+
+@IvyTest
 public class ProducerDAOTest extends DemoTestBase {
 	private static ProducerDAO producerDAO = new ProducerDAO();
 
@@ -114,7 +113,7 @@ public class ProducerDAOTest extends DemoTestBase {
 			public void deleteChildren(Producer bean) {
 			}
 		});
-		assertTrue("Deleted producer", producer.isDeleted());
+		assertThat(producer.isDeleted()).as("Deleted producer").isTrue();
 	}
 
 	@Test
@@ -122,12 +121,12 @@ public class ProducerDAOTest extends DemoTestBase {
 		producerDAO.save(createFakeData());
 		try (CriteriaQueryGenericContext<Producer, Tuple> q = producerDAO.initializeQuery(Producer.class,
 				Tuple.class)) {
-			Expression<String> path1 = producerDAO.getExpression(null, q.r, Producer_.name);
+			Expression<String> path1 = ProducerDAO.getExpression(null, q.r, Producer_.name);
 			q.q.where(q.c.like(path1, "axon"));
 			q.q.multiselect(path1);
 			List<Tuple> tuples = producerDAO.findByCriteria(q);
-			assertEquals(1, tuples.size());
-			assertEquals("axon", tuples.get(0).get(0));
+			assertThat(tuples).as("Found exactly one entry").hasSize(1);
+			assertThat(tuples.get(0).get(0)).as("Name of entry match").isEqualTo("axon");
 		}
 	}
 
@@ -138,7 +137,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		FindByExample<Producer> pr = FindByExample.getInstance(Producer.class);
 
 		producer = producerDAO.findFirstByExample(pr);
-		assertTrue(producer != null);
+		assertThat(producer).isNotNull();
 	}
 
 	@Test
@@ -148,7 +147,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		example.getE().setName("axon");
 		List<Producer> producers = new ArrayList<>();
 		producers = producerDAO.findByExample(example, Producer_.name);
-		assertTrue(producers.size() > 0);
+		assertThat(producers).isNotEmpty();
 	}
 
 	@Test
@@ -158,7 +157,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		example.getE().setName("xon");
 		List<Producer> producers = new ArrayList<>();
 		producers = producerDAO.findByExample(example, Optional.of(Boolean.TRUE), Producer_.name);
-		assertTrue(producers.size() > 0);
+		assertThat(producers).isNotEmpty();
 	}
 
 	@Test
@@ -169,9 +168,10 @@ public class ProducerDAOTest extends DemoTestBase {
 		List<Producer> producers = new ArrayList<>();
 		producers = producerDAO.findByExample(example, Optional.of(Boolean.TRUE), Optional.of(Boolean.TRUE),
 				Producer_.name);
-		assertTrue(producers.size() > 0);
+		assertThat(producers).isNotEmpty();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testFindByExampleWithParameterOrLikeIsAscending() throws TransactionRolledbackException {
 		producerDAO.saveAll(createFakeDatas());
@@ -181,7 +181,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		Boolean[] booleans = { false, true };
 		producers = producerDAO.findByExample(example, Optional.of(Boolean.TRUE), Optional.of(Boolean.TRUE), booleans,
 				Producer_.name);
-		assertTrue(producers.size() > 0);
+		assertThat(producers).isNotEmpty();
 	}
 
 	@Test
@@ -195,7 +195,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		Integer result = 1;
 		producers = producerDAO.findByExample(example, Optional.of(Boolean.TRUE), Optional.of(Boolean.TRUE), booleans,
 				fisrt, result, Producer_.name);
-		assertTrue(producers.size() == 1);
+		assertThat(producers).as("Found exactly one entry").hasSize(1);
 	}
 
 	@Test
@@ -205,7 +205,7 @@ public class ProducerDAOTest extends DemoTestBase {
 			Predicate wdaInPredicate = query.c.equal(query.r.get(Producer_.name), "axon");
 			query.d.where(wdaInPredicate);
 			Long result = producerDAO.deletePhysicallyRawByCriteria(query);
-			assertTrue(result > 0);
+			assertThat(result).isGreaterThan(0);
 		}
 	}
 
@@ -214,7 +214,8 @@ public class ProducerDAOTest extends DemoTestBase {
 		Producer producer = new Producer();
 		producer = producerDAO.save(createFakeData());
 		producer = producerDAO.deleteWithoutAuditing(producer);
-		assertTrue("Deleted producer", producer.isDeleted());
+		producer = producerDAO.find(producer);
+		assertThat(producer).as("Deleted producer").isNull();
 	}
 
 	@Test
@@ -222,7 +223,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		Producer producer = new Producer();
 		producer = producerDAO.save(createFakeData());
 		producer = producerDAO.undelete(producer);
-		assertTrue("Deleted producer", !producer.isDeleted());
+		assertThat(producer.isDeleted()).as("Deleted producer").isFalse();
 	}
 
 	@Test
@@ -230,7 +231,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		Collection<Producer> producers = new ArrayList<>();
 		List<Producer> pros = createFakeDatas();
 		producers = producerDAO.findByEntityIds(pros);
-		assertTrue(producers.size() > 0);
+		assertThat(producers).isNotEmpty();
 	}
 
 	@Test
@@ -239,7 +240,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		List<Producer> pros = createFakeDatas();
 		List<String> ids = pros.stream().map(e -> e.getId()).collect(Collectors.toList());
 		producers = producerDAO.findByIds(ids);
-		assertTrue(producers.size() > 0);
+		assertThat(producers).isNotEmpty();
 	}
 
 	@Test
@@ -247,7 +248,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		Producer producer = new Producer();
 		producer = producerDAO.save(createFakeData());
 		producer = producerDAO.saveWithoutAuditing(producer);
-		assertTrue(producer != null);
+		assertThat(producer).isNotNull();
 	}
 
 }

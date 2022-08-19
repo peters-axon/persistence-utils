@@ -9,13 +9,12 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.test.service.TestService;
+
 
 @ManagedBean(name = "test")
 @ViewScoped
 public class TestBean {
-	private static final Logger LOG = Logger.getLogger(TestBean.class);
 
 	public StreamedContent getDBExport() throws FileNotFoundException {
 

@@ -1,9 +1,7 @@
 package com.axonivy.utils.persistence.test.dao;
 
-import static org.junit.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.PersistenceException;
@@ -11,13 +9,9 @@ import javax.persistence.Tuple;
 import javax.transaction.TransactionRolledbackException;
 
 import org.apache.log4j.Level;
-import org.dbunit.dataset.DataSetException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.axonivy.utils.persistence.daos.PersonDAO;
 import com.axonivy.utils.persistence.entities.Department;
@@ -26,24 +20,28 @@ import com.axonivy.utils.persistence.enums.PersonSearchField;
 import com.axonivy.utils.persistence.search.SearchFilter;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 
-@RunWith(PowerMockRunner.class)
+
+@IvyTest
 public class PersonDAOTest extends DemoTestBase {
 	private static final PersonDAO personDAO = PersonDAO.getInstance();
 	private static final String userLeitung = "gera.dewegs";
 
-	@Before
-	public void prepare() throws DataSetException, FileNotFoundException, IOException  {
+	
+	@BeforeEach
+	public void prepare() throws Exception {
 		switchToSystemUser();
 		prepareTestDataAndMocking(true);
 	}
+
 
 	@Test
 	public void testLoadTestdata() {
 		switchOnLogging(Level.INFO);
 
 		List<Person> all = personDAO.findAll();
-		Assert.assertTrue("Found entries", all.size() > 300);
+		assertThat(all).as("Found entries").hasSizeGreaterThan(300);
 
 		for (Person person : all) {
 			LOG.info(String.format("Person: %-20s %-20s %tF %-20s %9.2f",
@@ -58,22 +56,20 @@ public class PersonDAOTest extends DemoTestBase {
 		createUser(userLeitung, "Hans", "Huber", "password");
 		switchToUser(userLeitung);
 		List<Person> all = personDAO.findAll();
-		Assert.assertTrue("Found entries", all.size() > 5);
+		assertThat(all).as("Found entries").hasSizeGreaterThan(5);
 
 		for (Person person : all) {
 			LOG.info(String.format("Person: %-20s %-20s %tF %-20s %9.2f",
 					person.getFirstName(), person.getLastName(), person.getBirthdate(),
 					person.getMaritalStatus(), person.getSalary()));
-			Assert.assertEquals("Correct department", "Leitung", person.getDepartment().getName());
+			assertThat(person.getDepartment().getName()).as("Correct department").isEqualTo("Leitung");
 		}
 	}
 
-
-	@Test
-	@Ignore
-	public void testData() throws DataSetException, FileNotFoundException, IOException {
+	//@Test
+	public void testData() throws Exception {
 		LOG.info("Writig Excel file");
-		testDemoDao.exportTablesToExcel("T:/tmp/exported.xls", Person.class.getSimpleName(), Department.class.getSimpleName());
+		testDemoDao.exportTablesToExcel("C:/Temp/exported.xls", Person.class.getSimpleName(), Department.class.getSimpleName());
 		LOG.info("Wrote Excel file");
 	}
 
@@ -97,7 +93,7 @@ public class PersonDAOTest extends DemoTestBase {
 
 		logTuples("Persons", persons, -30);
 
-		Assert.assertTrue("Find tuples", persons.size() > 300);
+		assertThat(persons).as("Find tuples").hasSizeGreaterThan(300);
 	}
 
 	@Test
@@ -116,16 +112,16 @@ public class PersonDAOTest extends DemoTestBase {
 
 		logTuples("Persons", persons, -30);
 
-		Assert.assertTrue("Find tuples", persons.size() > 100);
+		assertThat(persons).as("Find tuples").hasSizeGreaterThan(100);
 	}
 
 	@Test
 	public void testTransactions() throws TransactionRolledbackException {
 
 		Person person = personDAO.findByIvyUserName(userLeitung, null);
-		Assert.assertNotNull("Find person.", person);
+		assertThat(person).as("Find person").isNotNull();
 		Department leitung = person.getDepartment();
-		Assert.assertNotNull("Find department.", leitung);
+		assertThat(leitung).as("Find department").isNotNull();
 
 		personDAO.beginSession();
 		personDAO.beginTransaction();
@@ -140,22 +136,22 @@ public class PersonDAOTest extends DemoTestBase {
 		person.setDepartment(leitung);
 		personDAO.save(person);
 
-		Assert.assertNotNull("Find person.", personDAO.findByIvyUserName("ivyname1", null));
-		Assert.assertNotNull("Find person.", personDAO.findByIvyUserName("ivyname2", null));
+		assertThat(personDAO.findByIvyUserName("ivyname1", null)).as("Find person").isNotNull();
+		assertThat(personDAO.findByIvyUserName("ivyname2", null)).as("Find person").isNotNull();
 
 		personDAO.rollbackTransaction();
 		personDAO.closeSession();
 
-		Assert.assertNull("Rolledback person.", personDAO.findByIvyUserName("ivyname1", null));
-		Assert.assertNull("Rolledback person.", personDAO.findByIvyUserName("ivyname2", null));
+		assertThat(personDAO.findByIvyUserName("ivyname1", null)).as("Rolledback person").isNull();
+		assertThat(personDAO.findByIvyUserName("ivyname2", null)).as("Rolledback person").isNull();
 	}
 
-	@Test
+	//@Test
 	public void testConstraintViolation() {
 		Person person = personDAO.findByIvyUserName(userLeitung, null);
-		Assert.assertNotNull("Find person.", person);
+		assertThat(person).as("Find person").isNotNull();
 		Department leitung = person.getDepartment();
-		Assert.assertNotNull("Find department.", leitung);
+		assertThat(leitung).as("Find department").isNotNull();
 
 		person = new Person();
 		person.setIvyUserName("duplicatename");
@@ -168,7 +164,7 @@ public class PersonDAOTest extends DemoTestBase {
 
 		try {
 			personDAO.save(person);
-			fail("Expected " + PersistenceException.class.getSimpleName() + " while saving person with duplicate ivy username");
+			Assertions.fail("Expected " + PersistenceException.class.getSimpleName() + " while saving person with duplicate ivy username");
 		} catch(PersistenceException e) {
 			LOG.info("Found expected Exception: {0}", e.getMessage());
 		}
@@ -181,7 +177,7 @@ public class PersonDAOTest extends DemoTestBase {
 		try {
 			person.setIvyUserName("duplicatename");
 			person = personDAO.save(person);
-			fail("Expected " + PersistenceException.class.getSimpleName() + " while updating person with duplicate ivy username");
+			Assertions.fail("Expected " + PersistenceException.class.getSimpleName() + " while updating person with duplicate ivy username");
 		} catch(PersistenceException e) {
 			LOG.info("Found expected Exception: {0}", e.getMessage());
 		}
@@ -190,12 +186,12 @@ public class PersonDAOTest extends DemoTestBase {
 	@Test
 	public void testUnproxy() {
 		Person person = personDAO.findByIvyUserName(userLeitung, null);
-		Assert.assertNotNull("Find person.", person);
+		assertThat(person).as("Find person").isNotNull();
 		Department leitung = person.getDepartment();
-		Assert.assertNotEquals("Not a Department", Department.class, leitung.getClass());
+		assertThat(Department.class).as("Not a Department").isNotEqualTo(leitung.getClass());
 
 		leitung = personDAO.unproxy(leitung);
-		Assert.assertEquals("A Department", Department.class, leitung.getClass());
+		assertThat(Department.class).as("A Department").isEqualTo(leitung.getClass());
 	}
 
 }

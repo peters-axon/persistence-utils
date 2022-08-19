@@ -8,13 +8,11 @@ import com.axonivy.utils.persistence.dao.ExpressionMap;
 import com.axonivy.utils.persistence.entities.Product;
 import com.axonivy.utils.persistence.entities.Product_;
 import com.axonivy.utils.persistence.enums.ProductSearchField;
-import com.axonivy.utils.persistence.logging.Logger;
 import com.axonivy.utils.persistence.search.AttributePredicates;
 import com.axonivy.utils.persistence.search.FilterPredicate;
 
-public class ProductDAO extends AuditableDAO<Product_, Product> implements BaseDAO {
 
-	private static final Logger LOG = Logger.getLogger(ProductDAO.class);
+public class ProductDAO extends AuditableDAO<Product_, Product> implements BaseDAO {
 
 	@Override
 	protected Class<Product> getType() {

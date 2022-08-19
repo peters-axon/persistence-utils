@@ -10,7 +10,6 @@ import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
 import com.axonivy.utils.persistence.dao.QuerySettings;
-import com.axonivy.utils.persistence.demo.Logger;
 import com.axonivy.utils.persistence.demo.daos.PersonDAO;
 import com.axonivy.utils.persistence.demo.entities.Person;
 import com.axonivy.utils.persistence.demo.enums.PersonSearchField;
@@ -18,10 +17,10 @@ import com.axonivy.utils.persistence.search.SearchFilter;
 
 
 public class PersonSearchLazyDataModel extends LazyDataModel<Tuple> {
-	private static Logger LOG = Logger.getLogger(PersonSearchLazyDataModel.class);
 	private static final long serialVersionUID = 1L;
 	private List<Tuple> personTuples;
 
+	
 	public PersonSearchLazyDataModel() {
 		super();
 	}
@@ -34,7 +33,6 @@ public class PersonSearchLazyDataModel extends LazyDataModel<Tuple> {
 				return tuple;
 			}
 		}
-
 		return null;
 	}
 

@@ -1,38 +1,33 @@
 package com.axonivy.utils.persistence.test.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
-import org.apache.log4j.Level;
-import org.dbunit.dataset.DataSetException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.axonivy.utils.persistence.StringUtilities;
 import com.axonivy.utils.persistence.daos.HistorizedPersonDAO;
 import com.axonivy.utils.persistence.entities.HistorizedPerson;
 import com.axonivy.utils.persistence.history.beans.History;
 import com.axonivy.utils.persistence.history.dao.HistoryDAO;
-import com.axonivy.utils.persistence.logging.Logger;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 
-@RunWith(PowerMockRunner.class)
+
+@IvyTest
 public class HistorizedPersonDAOTest extends DemoTestBase {
 	private static final HistorizedPersonDAO DAO = HistorizedPersonDAO.getInstance();
-	private static final Logger LOG = Logger.getLogger(HistorizedPersonDAOTest.class);
 
-	@Before
-	public void prepare() throws DataSetException, FileNotFoundException, IOException  {
+	
+	@BeforeEach
+	public void prepare() throws Exception {
 		switchToSystemUser();
-		//prepareTestDataAndMocking(true);
+		prepareTestDataAndMocking(true);
 	}
+
 
 	@Test
 	public void testHistory() {
@@ -52,23 +47,25 @@ public class HistorizedPersonDAOTest extends DemoTestBase {
 		historizedPerson2 = DAO.save(historizedPerson2);
 		
 		List<History> result = historyDAO.findByTypeAndId(HistorizedPerson.class, historizedPerson2.getId());
-		assertTrue("found no history entry", result.size() == 0);
+		assertThat(result).as("Found no history entry").isEmpty();
 		
 		historizedPerson2.setLastName("Binder");
 		historizedPerson2 = DAO.save(historizedPerson2);
 		
 		result = historyDAO.findByTypeAndId(HistorizedPerson.class, historizedPerson2.getId());
-		assertTrue("found exactly one history entry", result.size() == 1);
+		assertThat(result).as("Found exactly one history entry").hasSize(1);
 		
 		result = historyDAO.findByTypeAndId(HistorizedPerson.class, historizedPerson.getId());
-		assertTrue("found exactly one history entry", result.size() == 1);
+		assertThat(result).as("Found exactly one history entry").hasSize(1);
 		
 		DAO.delete(historizedPerson);
 		result = historyDAO.findByTypeAndId(HistorizedPerson.class, historizedPerson.getId());
-		
-		assertTrue("found exactly two history entries", result.size() == 2);		
-		assertEquals("name of history entries match", "Mayer", StringUtilities.fromJSONToObject(result.get(1).getJsonData(), HistorizedPerson.class).getLastName());
-		assertEquals("name of history entries match", "Maier", StringUtilities.fromJSONToObject(result.get(0).getJsonData(), HistorizedPerson.class).getLastName());
+
+		assertThat(result).as("Found exactly two history entries").hasSize(2);
+		assertThat(StringUtilities.fromJSONToObject(result.get(1).getJsonData(), HistorizedPerson.class).getLastName())
+			.as("Name of history entries match").isEqualTo("Mayer");
+		assertThat(StringUtilities.fromJSONToObject(result.get(0).getJsonData(), HistorizedPerson.class).getLastName())
+			.as("Name of history entries match").isEqualTo("Maier");
 		
 		//switchOnLogging(Level.INFO, packageLevelHibernateFull());
 		/*result.forEach(history -> {

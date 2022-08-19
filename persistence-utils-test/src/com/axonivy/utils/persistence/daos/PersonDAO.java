@@ -156,10 +156,9 @@ public class PersonDAO extends AuditableDAO<Person_, Person> implements BaseDAO 
 						getExpression(expressionMap, query.r, Person_.lastName));
 				break;
 			case MARITAL_STATUS:
-			{
 				Expression<MaritalStatus> expression = getExpression(expressionMap, query.r, Person_.maritalStatus);
 				
-				boolean res = attributePredicate.addSelection(expression);
+				attributePredicate.addSelection(expression);
 				attributePredicate.addOrder(query.c.asc(expression));
 				String name = filterPredicate.getValue();
 				if (name != null) {
@@ -167,7 +166,6 @@ public class PersonDAO extends AuditableDAO<Person_, Person> implements BaseDAO 
 					attributePredicate.addPredicate(query.c.equal(expression, maritalStatus));
 				}
 				break;
-			}
 			case SALARY:
 				Expression<BigDecimal> salaryExpresssion = getExpression(expressionMap, query.r, Person_.salary);
 				attributePredicate.addSelection(salaryExpresssion);

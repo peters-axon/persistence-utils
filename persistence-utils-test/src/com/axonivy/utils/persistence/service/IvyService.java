@@ -10,6 +10,7 @@ import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.exec.Sudo;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 
@@ -34,7 +35,7 @@ public class IvyService {
 	 * @throws Exception
 	 */
 	public static <T> T executeAsSystem(Callable<T> callable) throws Exception {
-		return Ivy.wf().getSecurityContext().executeAsSystemUser(callable);
+		return Sudo.call(callable);
 	}
 
 	/**
@@ -47,22 +48,13 @@ public class IvyService {
 	}
 
 	/**
-	 * Get the top level role.
-	 * 
-	 * @return
-	 */
-	public static IRole getApplicationTopLevelRole() {
-		return Ivy.wf().getSecurityContext().getTopLevelRole();
-	}
-
-	/**
 	 * Find an ivy role.
 	 * 
 	 * @param rolename
 	 * @return
 	 */
 	public static IRole findRole(String rolename) {
-		return Ivy.wf().getSecurityContext().findRole(rolename);
+		return Ivy.wf().getSecurityContext().roles().find(rolename);
 	}
 
 	/**
@@ -72,7 +64,7 @@ public class IvyService {
 	 * @return
 	 */
 	public static IUser findUser(String username) {
-		return Ivy.wf().getSecurityContext().findUser(username);
+		return Ivy.wf().getSecurityContext().users().find(username);
 	}
 
 	/**
@@ -141,7 +133,7 @@ public class IvyService {
 		IWorkflowSession session = Ivy.session();
 		if(session != null) {
 			try {
-				user = executeAsSystem(() -> session.getSecurityContext().getSystemUser());
+				user = executeAsSystem(() -> session.getSecurityContext().users().system());
 			} catch (Exception e) {
 				LOG.error("Could not determine the system user.", e);
 			}

@@ -1,31 +1,33 @@
 package com.axonivy.utils.persistence.test.dao;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.log4j.Level;
 import org.dbunit.dataset.DataSetException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.axonivy.utils.persistence.daos.DepartmentDAO;
 import com.axonivy.utils.persistence.entities.Department;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 
-@RunWith(PowerMockRunner.class)
+
+@IvyTest
 public class DepartmentDAOTest extends DemoTestBase {
 	private static final DepartmentDAO departmentDAO = DepartmentDAO.getInstance();
 
-	@Before
+	@BeforeEach
 	public void prepare() throws Exception {
-		prepareTestDataAndMocking(true);
 		switchToSystemUser();
+		prepareTestDataAndMocking(true);
 	}
 
+	
 	@Test
 	public void testData() throws DataSetException, FileNotFoundException, IOException {
 		switchOnLogging(Level.INFO, packageLevel("com.axonivy", Level.INFO));
@@ -36,10 +38,10 @@ public class DepartmentDAOTest extends DemoTestBase {
 		Department produktion = departmentDAO.findByName("Produktion");
 		Department vertrieb = departmentDAO.findByName("Vertrieb");
 
-		Assert.assertNotNull("Find Einkauf", einkauf);
-		Assert.assertNotNull("Find Leitung", leitung);
-		Assert.assertNotNull("Find Marketing", marketing);
-		Assert.assertNotNull("Find Produktion", produktion);
-		Assert.assertNotNull("Find Vertrieb", vertrieb);
+		assertThat(einkauf).as("Find Einkauf").isNotNull();
+		assertThat(leitung).as("Find Leitung").isNotNull();
+		assertThat(marketing).as("Find Marketing").isNotNull();
+		assertThat(produktion).as("Find Produktion").isNotNull();
+		assertThat(vertrieb).as("Find Vertrieb").isNotNull();
 	}
 }

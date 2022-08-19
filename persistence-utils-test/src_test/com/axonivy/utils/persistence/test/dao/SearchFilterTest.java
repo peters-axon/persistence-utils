@@ -1,32 +1,31 @@
 package com.axonivy.utils.persistence.test.dao;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Tuple;
 
-import org.dbunit.dataset.DataSetException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.axonivy.utils.persistence.daos.PersonDAO;
 import com.axonivy.utils.persistence.enums.PersonSearchField;
 import com.axonivy.utils.persistence.search.SearchFilter;
 import com.axonivy.utils.persistence.test.DemoTestBase;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 
-@RunWith(PowerMockRunner.class)
+
+@IvyTest
 public class SearchFilterTest extends DemoTestBase {
 	private static final PersonDAO personDAO = PersonDAO.getInstance();
 
-	@Before
-	public void prepare() throws DataSetException, FileNotFoundException, IOException  {
+	@BeforeEach
+	public void prepare() throws Exception {
 		switchToSystemUser();
 		prepareTestDataAndMocking(true);
 	}
@@ -36,11 +35,8 @@ public class SearchFilterTest extends DemoTestBase {
 	 */
 	@Test
 	public void testSearchSortingWithoutResultField() {
-
 		// first check for ascending sort order
-
 		SearchFilter filter = new SearchFilter();
-
 		// search including the sort field, sort ascending
 		filter
 		.add(PersonSearchField.BIRTHDATE)
@@ -50,8 +46,7 @@ public class SearchFilterTest extends DemoTestBase {
 		filter.addSort(PersonSearchField.IVY_USER_NAME, true);
 
 		List<Tuple> personsInclUserNameAsc = personDAO.findBySearchFilter(filter);
-		Assert.assertTrue("Find tuples, asc", personsInclUserNameAsc.size() > 300);
-
+		assertThat(personsInclUserNameAsc).as("Find tuples, asc").hasSizeGreaterThan(300);
 		// search excluding the sort field, sort ascending
 		filter = new SearchFilter();
 		filter
@@ -61,19 +56,16 @@ public class SearchFilterTest extends DemoTestBase {
 		filter.addSort(PersonSearchField.IVY_USER_NAME, true);
 
 		List<Tuple> personsExclUserNameAsc = personDAO.findBySearchFilter(filter);
-		Assert.assertTrue("Find tuples, asc", personsExclUserNameAsc.size() > 300);
+		assertThat(personsExclUserNameAsc).as("Find tuples, asc").hasSizeGreaterThan(300);
 
 		// sort order should match
-		Assert.assertEquals("Same result size, asc", personsInclUserNameAsc.size(), personsExclUserNameAsc.size());
-		Assert.assertArrayEquals("Same birthdates in same order, asc",
-				personsInclUserNameAsc.stream().map(t -> t.get(0)).toArray(Date[]::new),
-				personsExclUserNameAsc.stream().map(t -> t.get(0)).toArray(Date[]::new)
-				);
-		Assert.assertArrayEquals("Same salaries in same order, asc",
-				personsInclUserNameAsc.stream().map(t -> t.get(1)).toArray(BigDecimal[]::new),
-				personsExclUserNameAsc.stream().map(t -> t.get(1)).toArray(BigDecimal[]::new)
-				);
-
+		assertThat(personsExclUserNameAsc.size()).as("Same result size, asc").isEqualTo(personsInclUserNameAsc.size());
+		Assertions.assertArrayEquals(personsInclUserNameAsc.stream().map(t -> t.get(0)).toArray(Date[]::new), 
+				personsExclUserNameAsc.stream().map(t -> t.get(0)).toArray(Date[]::new), 
+				"Same birthdates in same order, asc");
+		Assertions.assertArrayEquals(personsInclUserNameAsc.stream().map(t -> t.get(1)).toArray(BigDecimal[]::new),
+				personsExclUserNameAsc.stream().map(t -> t.get(1)).toArray(BigDecimal[]::new), 
+				"Same salaries in same order, asc");
 		// now check for descending sort order
 
 		// search including the sort field, sort descending
@@ -85,7 +77,7 @@ public class SearchFilterTest extends DemoTestBase {
 		filter.addSort(PersonSearchField.IVY_USER_NAME, false);
 
 		List<Tuple> personsInclUserNameDesc = personDAO.findBySearchFilter(filter);
-		Assert.assertTrue("Find tuples, desc", personsInclUserNameDesc.size() > 300);
+		assertThat(personsInclUserNameDesc).as("Find tuples, desc").hasSizeGreaterThan(300);
 
 		// search excluding the sort field, sort descending
 		filter = new SearchFilter();
@@ -96,20 +88,18 @@ public class SearchFilterTest extends DemoTestBase {
 		filter.addSort(PersonSearchField.IVY_USER_NAME, false);
 
 		List<Tuple> personsExclUserNameDesc = personDAO.findBySearchFilter(filter);
-		Assert.assertTrue("Find tuples, desc", personsExclUserNameDesc.size() > 300);
-
+		assertThat(personsExclUserNameDesc).as("Find tuples, desc").hasSizeGreaterThan(300);
 		// sort order should match
-		Assert.assertEquals("Same result size, desc", personsInclUserNameDesc.size(), personsExclUserNameDesc.size());
-		Assert.assertArrayEquals("Same birthdates in same order, desc",
-				personsInclUserNameDesc.stream().map(t -> t.get(0)).toArray(Date[]::new),
-				personsExclUserNameDesc.stream().map(t -> t.get(0)).toArray(Date[]::new)
-				);
-		Assert.assertArrayEquals("Same salaries in same order, desc",
-				personsInclUserNameDesc.stream().map(t -> t.get(1)).toArray(BigDecimal[]::new),
-				personsExclUserNameDesc.stream().map(t -> t.get(1)).toArray(BigDecimal[]::new)
-				);
-
+		assertThat(personsExclUserNameDesc.size()).as("Same result size, desc").isEqualTo(personsInclUserNameDesc.size());
+		Assertions.assertArrayEquals(personsInclUserNameDesc.stream().map(t -> t.get(0)).toArray(Date[]::new), 
+				personsExclUserNameDesc.stream().map(t -> t.get(0)).toArray(Date[]::new), 
+				"Same birthdates in same order, desc");
+		Assertions.assertArrayEquals(personsInclUserNameDesc.stream().map(t -> t.get(1)).toArray(BigDecimal[]::new),
+				personsExclUserNameDesc.stream().map(t -> t.get(1)).toArray(BigDecimal[]::new), 
+				"Same salaries in same order, desc");
 		// now make sure, that sorting was performed at all, asc should not match desc
-		Assert.assertNotEquals("Ascending and descending should differ", personsInclUserNameAsc.get(0), personsInclUserNameDesc.get(0));
+		assertThat(personsInclUserNameDesc.get(0))
+			.as("Ascending and descending should differ")
+			.isNotEqualTo(personsInclUserNameAsc.get(0));
 	}
 }

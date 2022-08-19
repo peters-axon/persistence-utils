@@ -29,6 +29,8 @@ import ch.ivyteam.ivy.security.synch.SynchronizationListener;
 import ch.ivyteam.ivy.security.synch.UserSynchResult;
 import ch.ivyteam.ivy.security.user.IUserRepository;
 
+
+@SuppressWarnings("deprecation")
 public class SimpleSecurityContext implements ISecurityContext {
 	private static final Logger LOG = Logger.getLogger(SimpleSecurityContext.class);
 
@@ -51,7 +53,7 @@ public class SimpleSecurityContext implements ISecurityContext {
 
 	public IRole removeSimpleRole(String rolename) {
 		IRole role = rolesMap.remove(rolename);
-		if(role.getParent() != null) {
+		if(role != null && role.getParent() != null) {
 			((SimpleRole)role.getParent()).removeChildRole(role);
 		}
 		if(role != null) {
@@ -256,24 +258,22 @@ public class SimpleSecurityContext implements ISecurityContext {
 
 	@Override
 	public IUserRepository users() {
-		throw new NotMockedException();	}
+		return Mocked.userRepository;
+	}
 
 	@Override
 	public IMemberRepository members() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotMockedException();
 	}
 
 	@Override
 	public IRoleRepository roles() {
-		// TODO Auto-generated method stub
-		return null;
+		return Mocked.roleRepository;
 	}
 
 	@Override
 	public ISessionRepository sessions() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotMockedException();
 	}
 	
 }

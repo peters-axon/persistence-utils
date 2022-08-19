@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,6 +20,7 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.process.model.value.SignalCode;
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.exec.Sudo;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
@@ -38,7 +38,6 @@ public class IvyService {
 	private static final String SESSION_KEY_BASE = IvyService.class.getCanonicalName() + ".";
 	private static final String SESSION_OLD_CONTENT_LOCALE = SESSION_KEY_BASE + "oldContentLocale";
 	private static final String SESSION_OLD_FORMATTING_LOCALE = SESSION_KEY_BASE + "oldFormattingLocale";
-	private static final Pattern PATHPART = Pattern.compile("[/ ]*(.*?)[/ ]*");
 	private static final String DESIGNER_APPLICATION_NAME = "designer";
 
 	private IvyService() {
@@ -82,7 +81,7 @@ public class IvyService {
 	 * @throws Exception
 	 */
 	public static <T> T executeAsSystem(Callable<T> callable) throws Exception {
-		return Ivy.wf().getSecurityContext().executeAsSystemUser(callable);
+		return Sudo.call(callable);
 	}
 
 	/**
@@ -92,15 +91,6 @@ public class IvyService {
 	 */
 	public static long getApplicationId() {
 		return Ivy.wf().getApplication().getId();
-	}
-
-	/**
-	 * Get the top level role.
-	 * 
-	 * @return
-	 */
-	public static IRole getApplicationTopLevelRole() {
-		return Ivy.wf().getSecurityContext().getTopLevelRole();
 	}
 
 	/**
@@ -120,7 +110,7 @@ public class IvyService {
 	 * @return
 	 */
 	public static IRole findRole(String rolename) {
-		return Ivy.wf().getSecurityContext().findRole(rolename);
+		return Ivy.wf().getSecurityContext().roles().find(rolename);
 	}
 
 	/**
@@ -130,7 +120,7 @@ public class IvyService {
 	 * @return
 	 */
 	public static IUser findUser(String username) {
-		return Ivy.wf().getSecurityContext().findUser(username);
+		return Ivy.wf().getSecurityContext().users().findWithExternalLookup(username);
 	}
 
 	/**
@@ -211,7 +201,7 @@ public class IvyService {
 		IWorkflowSession session = Ivy.session();
 		if(session != null) {
 			try {
-				user = executeAsSystem(() -> session.getSecurityContext().getSystemUser());
+				user = executeAsSystem(() -> session.getSecurityContext().users().system());
 			} catch (Exception e) {
 				LOG.error("Could not determine the system user.", e);
 			}
@@ -327,7 +317,7 @@ public class IvyService {
 		IRole role = findRole(roleName);
 
 		if (role != null) {
-			users = role.getAllUsers();
+			users = role.users().allPaged().stream().collect(Collectors.toList());
 		}
 
 		return users;
@@ -407,7 +397,6 @@ public class IvyService {
 	 * @param caseQuery
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public static ICase executeCaseQueryForceSingleResult(CaseQuery caseQuery) {
 		List<ICase> icases = executeCaseQuery(caseQuery);
 		ICase result = null;
@@ -443,7 +432,6 @@ public class IvyService {
 	 * @param taskQuery
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public static ITask executeTaskQueryForceSingleResult(TaskQuery taskQuery) {
 		List<ITask> itasks = executeTaskQuery(taskQuery);
 		ITask result = null;

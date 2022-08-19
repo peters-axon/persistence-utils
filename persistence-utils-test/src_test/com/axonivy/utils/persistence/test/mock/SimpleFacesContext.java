@@ -16,10 +16,8 @@ import javax.faces.render.RenderKit;
 
 import org.mockito.Mockito;
 
-import com.axonivy.utils.persistence.demo.Logger;
 
 public class SimpleFacesContext extends FacesContext {
-	private static final Logger LOG = Logger.getLogger(SimpleFacesContext.class);
 
 	private List<FacesMessageEntry> facesMessages = new ArrayList<>();
 	private boolean validationFailed;
@@ -165,14 +163,8 @@ public class SimpleFacesContext extends FacesContext {
 		public String getClientId() {
 			return clientId;
 		}
-		public void setClientId(String clientId) {
-			this.clientId = clientId;
-		}
 		public FacesMessage getFacesMessage() {
 			return facesMessage;
-		}
-		public void setFacesMessage(FacesMessage facesMessage) {
-			this.facesMessage = facesMessage;
 		}
 	}
 }

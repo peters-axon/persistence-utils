@@ -37,7 +37,7 @@
             "groupId": "com.axonivy.utils.persistence",
             "artifactId": "persistence-utils",
             "version": "${version}",
-            "type": "iar"
+            "type": "jar"
           }
         ],
         "repositories": [

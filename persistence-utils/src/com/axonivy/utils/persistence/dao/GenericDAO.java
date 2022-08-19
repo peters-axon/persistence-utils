@@ -1110,6 +1110,7 @@ public abstract class GenericDAO<M extends GenericEntity_, T extends GenericEnti
 		return handler;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected T removeBean(T oldBean) {
 		T bean = oldBean;
 

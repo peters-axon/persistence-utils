@@ -20,6 +20,8 @@ import ch.ivyteam.ivy.security.IUserSubstitute;
 import ch.ivyteam.ivy.security.IUserToken;
 import ch.ivyteam.ivy.security.SubstitutionType;
 
+
+@SuppressWarnings("deprecation")
 public class SimpleUser implements IUser {
 	private long id = -1;
 	private String name;

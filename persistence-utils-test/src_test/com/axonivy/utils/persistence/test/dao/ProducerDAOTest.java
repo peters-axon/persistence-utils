@@ -171,6 +171,7 @@ public class ProducerDAOTest extends DemoTestBase {
 		assertThat(producers).isNotEmpty();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testFindByExampleWithParameterOrLikeIsAscending() throws TransactionRolledbackException {
 		producerDAO.saveAll(createFakeDatas());

@@ -30,6 +30,7 @@ import ch.ivyteam.ivy.security.synch.UserSynchResult;
 import ch.ivyteam.ivy.security.user.IUserRepository;
 
 
+@SuppressWarnings("deprecation")
 public class SimpleSecurityContext implements ISecurityContext {
 	private static final Logger LOG = Logger.getLogger(SimpleSecurityContext.class);
 

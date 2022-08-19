@@ -149,6 +149,7 @@ public abstract class AuditableDAO<MetaDataGeneric extends AuditableEntity_, A e
 		return filter(all, DEFAULT_AUDITABLE_STATUS);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected A removeBean(A oldBean) {
 		A bean = oldBean;

@@ -27,7 +27,7 @@ public class History extends GenericEntity<HistoryPK> {
 	@Column
 	private String userName;
 
-	@Column
+	@Column(length = 65535) // As the Lob type defaults to Blob with maximum length of 65,535 bytes
 	@Lob
 	private String jsonData;
 

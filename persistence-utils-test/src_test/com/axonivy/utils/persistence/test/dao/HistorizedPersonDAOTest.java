@@ -29,7 +29,7 @@ public class HistorizedPersonDAOTest extends DemoTestBase {
 	}
 
 
-	//@Test
+	@Test
 	public void testHistory() {
 		HistoryDAO historyDAO = new HistoryDAO(DAO.getPersistenceUnitName());
 		

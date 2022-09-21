@@ -1,0 +1,111 @@
+Dialogs:
+  com:
+    axonivy:
+      demo:
+        jpa_demo:
+          core:
+            DepartmentSearch:
+              addDepartment: add department
+              columns: Columns
+              delete: Delete
+              deleteHeader: Delete?
+              deleteMessage: Do you really want to the delete the department ''{0}''?
+              department: Department
+              departmentSearch: Department Search
+              edit: Edit
+              info: |
+                <ul>
+                <li>Also showing logically deleted departments</li>
+                <li>Non-Lazy search with <code>findAll()</code>, i.e. search returns Department objects</li>
+                <li>Validation</li>
+                <li>Intentional possibility to see fatal error (caused by exception) when trying to save a new department with an already existing name</li>
+                </ul>
+              infoHeader: Departmentsearch, Features
+              name: Name
+              save: Save
+              saveAnyway: Save Anyway
+            PersonSearch:
+              addPerson: add person
+              all: All
+              birthdate: Birthdate
+              columns: Columns
+              delete: Delete
+              deleteHeader: Delete?
+              deleteMessage: Do you really want to the delete person ''{0} {1}''?
+              departmentName: Department
+              edit: Edit
+              firstName: Firstname
+              info: |
+                <ul>
+                <li>Restriction to persons of the own department (except for role Administrator)</li>
+                <li>Lazy Search with <code>SearchFilter</code>, i.e. search returns Tuples</li>
+                <li>Validation with hard errors and additional warnings which can be applied with "save anyway"</li>
+                <li>Class-level validation warning, if Ivy user name is not firstname.lastname</li>
+                <li>Class-level validation error, if Ivy user name is not unique because it is used (including deleted users)</li>
+                </ul>
+              infoHeader: Personsearch, Features
+              ivyUserName: Ivy Username
+              lastName: Last Name
+              maritalStatus: Marital Status
+              maritalStatusLike: Marital Status Text
+              person: Person
+              personSearch: Person Search
+              salary: Salary
+              save: Save
+              saveAnyway: Save Anyway
+              syncToIvy: Ivy User
+            components:
+              Info:
+                info: Info
+                infoHeader: Info
+Enums:
+  com:
+    axonivy:
+      utils:
+        persistence:
+          demo:
+            enums:
+              MaritalStatus:
+                DIVORCED:
+                  name: divorced
+                MARRIED:
+                  name: married
+                PARTNERSHIP:
+                  name: registered partnership
+                PARTNERSHIP_CANCELED:
+                  name: partnership canceled
+                PARTNER_PASSED_AWAY:
+                  name: registered partner passed away
+                SINGLE:
+                  name: single
+                WIDOWED:
+                  name: widowed
+                X:
+                  name: divorced
+              Role:
+                ADMINISTRATOR:
+                  name: Administrator
+                USER:
+                  name: User
+Labels:
+  back: Back
+  cancel: Cancel
+  exceptionDetail: 'Details: {0}'
+  exceptionSummary: Internal error
+  ok: Ok
+Processes:
+  Names:
+    departmentSearch: Department Search
+    personSearch: Person Search
+    raiseSalaries: Raise Salaries
+Validations:
+  com:
+    axonivy:
+      utils:
+        persistence:
+          demo:
+            validation:
+              ValidIvyUserName:
+                unconventional: The name ''{0}'' does not follow the username conventions, which would suggest ''{1}''.
+              ValidUniqueIvyUserName:
+                duplicate: The name ''{0}'' is/was already used.

@@ -1,0 +1,10 @@
+Validations:
+  com:
+    axonivy:
+      utils:
+        persistence:
+          core:
+            size: The number of characters must be {0} to {1} (currently {2}).
+            sizeMax: Only {0} characters are allowed (currently {1}).
+            sizeMin: A minimum of {0} characters is required (currently {1}).
+            valueRequired: Value is missing.

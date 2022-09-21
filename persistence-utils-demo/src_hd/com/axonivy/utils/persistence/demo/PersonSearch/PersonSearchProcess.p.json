@@ -1,0 +1,331 @@
+{
+  "format" : "9.4.20",
+  "id" : "173A4BB5DE327C81",
+  "data" : "com.axonivy.utils.persistence.demo.PersonSearch.PersonSearchData",
+  "kind" : "HTML_DIALOG",
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start()",
+      "config" : {
+        "callSignature" : "start",
+        "guid" : "173A4BB5DFB9831F"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : 12, "y" : 35 }
+      },
+      "connect" : { "id" : "f7", "to" : "f6" }
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 384, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "HtmlDialogEventStart",
+      "name" : "close",
+      "config" : {
+        "guid" : "173A4BB5E1762041"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 480 },
+        "labelOffset" : { "x" : 9, "y" : 35 }
+      },
+      "connect" : { "id" : "f44", "to" : "f4" }
+    }, {
+      "id" : "f4",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 384, "y" : 480 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "Script",
+      "name" : "Initialize",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.persistence.demo.ui.PersonSearchBean;",
+            "",
+            "",
+            "in.personSearchBean = new PersonSearchBean();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 256, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f9",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 384, "y" : 128 }
+      }
+    }, {
+      "id" : "f14",
+      "type" : "HtmlDialogMethodStart",
+      "name" : "deletePerson(String)",
+      "config" : {
+        "callSignature" : "deletePerson",
+        "input" : {
+          "params" : [
+            { "name" : "personId", "type" : "String" }
+          ],
+          "map" : {
+            "out.personId" : "param.personId"
+          }
+        },
+        "guid" : "173B8B1F2B2EDEB8"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 416 },
+        "labelOffset" : { "x" : 16, "y" : 35 }
+      },
+      "connect" : { "id" : "f18", "to" : "f17" }
+    }, {
+      "id" : "f15",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 384, "y" : 416 }
+      }
+    }, {
+      "id" : "f17",
+      "type" : "Script",
+      "name" : [
+        "Delete person",
+        "(logically)"
+      ],
+      "config" : {
+        "output" : {
+          "code" : "in.personSearchBean.deletePerson(in.personId);"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 416 }
+      },
+      "connect" : { "id" : "f16", "to" : "f15" }
+    }, {
+      "id" : "f8",
+      "type" : "HtmlDialogMethodStart",
+      "name" : "editPerson(String)",
+      "config" : {
+        "callSignature" : "editPerson",
+        "input" : {
+          "params" : [
+            { "name" : "personId", "type" : "String" }
+          ],
+          "map" : {
+            "out.personId" : "param.personId"
+          }
+        },
+        "guid" : "173BE2C889B5F2EF"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 128 },
+        "labelOffset" : { "x" : 40, "y" : 35 }
+      },
+      "connect" : { "id" : "f20", "to" : "f19" }
+    }, {
+      "id" : "f19",
+      "type" : "Script",
+      "name" : "Prepare person",
+      "config" : {
+        "output" : {
+          "code" : "in.personSearchBean.setActivePerson(in.personId);"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 256, "y" : 128 }
+      },
+      "connect" : { "id" : "f10", "to" : "f9" }
+    }, {
+      "id" : "f12",
+      "type" : "HtmlDialogEventStart",
+      "name" : "savePerson",
+      "config" : {
+        "guid" : "173BE3564A4AB275"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 192 },
+        "labelOffset" : { "x" : 11, "y" : 35 }
+      },
+      "connect" : { "id" : "f21", "to" : "f11" }
+    }, {
+      "id" : "f13",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 928, "y" : 192 }
+      }
+    }, {
+      "id" : "f23",
+      "type" : "Script",
+      "name" : [
+        "Save and",
+        "sync person"
+      ],
+      "config" : {
+        "security" : "system",
+        "output" : {
+          "code" : "in.personSearchBean.saveAndSyncPerson();"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 608, "y" : 192 }
+      },
+      "connect" : { "id" : "f29", "to" : "f28" }
+    }, {
+      "id" : "f11",
+      "type" : "Script",
+      "name" : "Validate",
+      "config" : {
+        "security" : "system",
+        "output" : {
+          "code" : [
+            "in.secondSave = in.personSearchBean.isSaveViolationMaxWarning();",
+            "in.personSearchBean.validatePersonForSave(in.secondSave);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 256, "y" : 192 }
+      },
+      "connect" : { "id" : "f26", "to" : "f25" }
+    }, {
+      "id" : "f25",
+      "type" : "Alternative",
+      "name" : "valid?",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 192 },
+        "labelOffset" : { "x" : 10, "y" : -16 }
+      },
+      "connect" : [
+        { "id" : "f22", "to" : "f23", "label" : {
+            "name" : "yes",
+            "segment" : 0.08,
+            "offset" : { "x" : -2, "y" : -11 }
+          }, "condition" : "in.personSearchBean.isNoSaveViolation()" },
+        { "id" : "f35", "to" : "f36", "via" : [ { "x" : 352, "y" : 256 } ], "label" : {
+            "name" : "max warning",
+            "segment" : 1.36,
+            "offset" : { "x" : 0, "y" : -11 }
+          }, "condition" : "in.personSearchBean.isSaveViolationMaxWarning()" },
+        { "id" : "f37", "to" : "f13", "via" : [ { "x" : 352, "y" : 306 }, { "x" : 864, "y" : 306 }, { "x" : 864, "y" : 192 } ], "label" : {
+            "name" : "error or higher",
+            "segment" : 1.09,
+            "offset" : { "x" : 0, "y" : -10 }
+          } }
+      ]
+    }, {
+      "id" : "f28",
+      "type" : "Script",
+      "name" : "Hide dialog",
+      "config" : {
+        "output" : {
+          "code" : [
+            "in.personSearchBean.resetSaveViolation();",
+            "in.personSearchBean.hidePersonDialog();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 768, "y" : 192 }
+      },
+      "connect" : { "id" : "f41", "to" : "f13" }
+    }, {
+      "id" : "f30",
+      "type" : "HtmlDialogEventStart",
+      "name" : "cancelPerson",
+      "config" : {
+        "guid" : "173BF851594E58BE"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 352 },
+        "labelOffset" : { "x" : 12, "y" : 35 }
+      },
+      "connect" : { "id" : "f34", "to" : "f33" }
+    }, {
+      "id" : "f31",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 384, "y" : 352 }
+      }
+    }, {
+      "id" : "f33",
+      "type" : "Script",
+      "name" : [
+        "Reset",
+        "Validation"
+      ],
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.persistence.demo.service.ValidationService;",
+            "",
+            "",
+            "ValidationService.resetValidation();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 352 }
+      },
+      "connect" : { "id" : "f32", "to" : "f31" }
+    }, {
+      "id" : "f36",
+      "type" : "Alternative",
+      "name" : "second save?",
+      "visual" : {
+        "at" : { "x" : 480, "y" : 256 },
+        "labelOffset" : { "x" : 20, "y" : 39 },
+        "description" : "Second save will only be set, if the user presses save after showing warnings."
+      },
+      "connect" : [
+        { "id" : "f27", "to" : "f23", "via" : [ { "x" : 480, "y" : 192 } ], "label" : {
+            "name" : "yes",
+            "segment" : 0.55,
+            "offset" : { "x" : 17, "y" : -6 }
+          }, "condition" : "in.secondSave" },
+        { "id" : "f24", "to" : "f13", "via" : [ { "x" : 864, "y" : 256 }, { "x" : 864, "y" : 192 } ], "label" : {
+            "name" : "no",
+            "segment" : 0.05,
+            "offset" : { "x" : 1, "y" : -8 }
+          } }
+      ]
+    }, {
+      "id" : "f38",
+      "type" : "ErrorStartEvent",
+      "name" : "Show error",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.persistence.demo.service.UiService;",
+            "",
+            "",
+            "UiService.addExceptionFacesMessage(error);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 640 },
+        "labelOffset" : { "x" : 23, "y" : 35 }
+      },
+      "connect" : { "id" : "f40", "to" : "f39" }
+    }, {
+      "id" : "f39",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 384, "y" : 640 }
+      }
+    } ],
+  "layout" : {
+    "lanes" : [ {
+        "size" : 576
+      }, {
+        "name" : "Error",
+        "size" : 128
+      } ]
+  }
+}

@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.axonivy.utils.persistence</groupId>
   <artifactId>persistence-utils</artifactId>
-  <version>9.3.4-SNAPSHOT</version>
+  <version>9.4.0-SNAPSHOT</version>
   <packaging>iar</packaging>
   <dependencies>
     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen -->
@@ -19,7 +19,7 @@
       <plugin>
         <groupId>com.axonivy.ivy.ci</groupId>
         <artifactId>project-build-plugin</artifactId>
-        <version>9.3.2</version>
+        <version>9.4.1</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>

@@ -1,0 +1,111 @@
+Dialogs:
+  com:
+    axonivy:
+      demo:
+        jpa_demo:
+          core:
+            DepartmentSearch:
+              addDepartment: neue Abteilung
+              columns: Spalten
+              delete: Löschen
+              deleteHeader: Löschen?
+              deleteMessage: Wollen Sie die Abteilung ''{0}'' wirklich löschen?
+              department: Abteilung
+              departmentSearch: Abteilungssuche
+              edit: Editieren
+              info: |
+                <ul>
+                <li>Zeigt auch logisch gelöschte Abteilungen</li>
+                <li>Non-Lazy Suche mit <code>findAll()</code>, d.h. die Suche liefert Department Objekte</li>
+                <li>Validierung</li>
+                <li>Beabsichtigte Möglichkeit einen Fatal-error zu erzeugen (aufgrund einer Exception), indem eine neue Abteilung mit einerm bereits existierenden Namen gespeichert wird</li>
+                </ul>
+              infoHeader: Abteilungssuche, Features
+              name: Name
+              save: Speichern
+              saveAnyway: Trotzdem speichern
+            PersonSearch:
+              addPerson: neue Person
+              all: Alle
+              birthdate: Geburtstag
+              columns: Spalten
+              delete: Löschen
+              deleteHeader: Löschen?
+              deleteMessage: Wollen Sie die Person ''{0} {1}'' wirklich löschen?
+              departmentName: Abteilung
+              edit: Editieren
+              firstName: Vorname
+              info: |
+                <ul>
+                <li>Einschränkung auf Personen der eigenen Abteilung (ausgenommen Rolle Administrator)</li>
+                <li>Lazy Search mittels <code>SearchFilter</code>, d.h. die Suche liefert Tuples</li>
+                <li>Validierung mit harten Fehlern und zusätzlich Warnungen, die mit "Trotzdem speichern" übernommen werden können</li>
+                <li>Class-level Validierungswarnung falls Ivy user name nicht firstname.lastname entspricht</li>
+                <li>Class-level Validierungsfehler falls Ivy user name nicht eindeutig ist, weil er schon benutzt wird (inkl. gelöschte Benutzer)</li>
+                </ul>
+              infoHeader: Personensuche, Features
+              ivyUserName: Ivy Username
+              lastName: Nachname
+              maritalStatus: Familienstand
+              maritalStatusLike: Familienstand Text
+              person: Person
+              personSearch: Personensuche
+              salary: Gehalt
+              save: Speichern
+              saveAnyway: Trotzdem speichern
+              syncToIvy: Ivy User
+            components:
+              Info:
+                info: Info
+                infoHeader: Info
+Enums:
+  com:
+    axonivy:
+      utils:
+        persistence:
+          demo:
+            enums:
+              MaritalStatus:
+                DIVORCED:
+                  name: geschieden
+                MARRIED:
+                  name: verheiratet
+                PARTNERSHIP:
+                  name: eingetragene Partnerschaft
+                PARTNERSHIP_CANCELED:
+                  name: eingetragene Partnerschaft aufgehoben
+                PARTNER_PASSED_AWAY:
+                  name: eingetragener Partner verstorben
+                SINGLE:
+                  name: ledig
+                WIDOWED:
+                  name: verwitwet
+                X:
+                  name: x
+              Role:
+                ADMINISTRATOR:
+                  name: Administrator
+                USER:
+                  name: User
+Labels:
+  back: Zurück
+  cancel: Abbrechen
+  exceptionDetail: 'Details: {0}'
+  exceptionSummary: Interner Fehler
+  ok: Ok
+Processes:
+  Names:
+    departmentSearch: Abteilungssuche
+    personSearch: Personensuche
+    raiseSalaries: Gehaltserhöhungen
+Validations:
+  com:
+    axonivy:
+      utils:
+        persistence:
+          demo:
+            validation:
+              ValidIvyUserName:
+                unconventional: Der Name ''{0}'' folgt nicht den Konventionen, die ''{1}'' als Username vorsehen.
+              ValidUniqueIvyUserName:
+                duplicate: Der Name ''{0}'' wird/wurde bereits verwendet.

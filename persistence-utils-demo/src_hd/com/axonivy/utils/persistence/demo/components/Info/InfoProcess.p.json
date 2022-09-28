@@ -1,0 +1,78 @@
+{
+  "format" : "9.4.20",
+  "id" : "173BD7E18B4BE71C",
+  "data" : "com.axonivy.utils.persistence.demo.components.Info.InfoData",
+  "kind" : "HTML_DIALOG",
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start()",
+      "config" : {
+        "callSignature" : "start",
+        "guid" : "173BD7E18F345B7F"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : 12, "y" : 35 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "HtmlDialogMethodStart",
+      "name" : "showInfo(String)",
+      "config" : {
+        "callSignature" : "showInfo",
+        "input" : {
+          "params" : [
+            { "name" : "value", "type" : "String" }
+          ],
+          "map" : {
+            "out.value" : "param.value"
+          }
+        },
+        "guid" : "173BD8B13D0CDB1F"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 224 },
+        "labelOffset" : { "x" : 14, "y" : 35 }
+      },
+      "connect" : { "id" : "f10", "to" : "f9" }
+    }, {
+      "id" : "f7",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 224 }
+      }
+    }, {
+      "id" : "f9",
+      "type" : "Script",
+      "name" : "Show info",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.util.HashMap;",
+            "import java.util.Map;",
+            "import org.primefaces.PrimeFaces;",
+            "",
+            "ivy.log.info(in.value);",
+            "",
+            "Map options = new HashMap();",
+            "options.put(\"resizable\", false);",
+            "",
+            "",
+            "PrimeFaces.current().dialog().openDynamic(\"InfoDialog\", options, null);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 224 }
+      },
+      "connect" : { "id" : "f8", "to" : "f7" }
+    } ]
+}

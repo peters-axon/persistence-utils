@@ -1,0 +1,84 @@
+{
+  "format" : "9.4.20",
+  "id" : "17F21BE8CC94A13E",
+  "data" : "com.axonivy.utils.persistence.test.TestTasks.TestTasksData",
+  "kind" : "HTML_DIALOG",
+  "elements" : [ {
+      "id" : "f3",
+      "type" : "HtmlDialogEventStart",
+      "name" : "close",
+      "config" : {
+        "guid" : "171544322A1E7FF4"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 256 },
+        "labelOffset" : { "x" : 9, "y" : 35 }
+      },
+      "connect" : { "id" : "f5", "to" : "f4" }
+    }, {
+      "id" : "f4",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 256 }
+      }
+    }, {
+      "id" : "f18",
+      "type" : "HtmlDialogEventStart",
+      "name" : "prepareTestEnvironment",
+      "config" : {
+        "guid" : "172CC8F23D93EF68"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 },
+        "labelOffset" : { "x" : 17, "y" : 35 }
+      },
+      "connect" : { "id" : "f22", "to" : "f21" }
+    }, {
+      "id" : "f19",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 416, "y" : 160 }
+      }
+    }, {
+      "id" : "f21",
+      "type" : "Script",
+      "name" : [
+        "Prepare test",
+        "environment"
+      ],
+      "config" : {
+        "security" : "system",
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.persistence.test.service.TestService;",
+            "",
+            "",
+            "in.message = TestService.prepareTestDataAndIvy(in.cleanReload);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 280, "y" : 160 }
+      },
+      "connect" : { "id" : "f20", "to" : "f19" }
+    }, {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start()",
+      "config" : {
+        "callSignature" : "start",
+        "guid" : "173A42862125166E"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : 12, "y" : 35 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 416, "y" : 64 }
+      }
+    } ]
+}

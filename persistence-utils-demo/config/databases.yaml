@@ -1,6 +1,6 @@
 Databases:
   jpa-demo:
-    Url: jdbc:hsqldb:mem:jpa_demo
-    Driver: org.hsqldb.jdbc.JDBCDriver
-    UserName: sa
-    Password: ${decrypt:\u0001\u008D\u0053\u006E\u001C\u00F6\u006E\u00ED\u00E8\u007F\u003C\u00B6\u000C\u00F5\u00E6\u0051}
+    Url: jdbc:sqlserver://localhost;databaseName=jpa_demo
+    Driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    UserName: jpa_demo
+    Password: ${decrypt:\u00CB\u0048\u002C\u002E\u0083\u006B\u0042\u00BC\u00AF\u00EE\u009D\u0081\u00E0\u00EA\u000B\u0080\u0057\u0009\u003A\u00A6\u00E6\u007D\u004C\u00A4\u00F3\u00D3\u0052\u0037\u0056\u00F1\u00EE\u00A9\u0050\u0092\u00F1\u001E\u00AA\u0010\u0042\u00C1\u0046\u0015\u0027\u006D\u0059\u0093\u0019\u00D2\u00F4\u0006\u001F\u00E5\u0084\u00A7\u00CB\u0092\u00E6\u0058\u00E2\u00D9\u0091\u00CC\u00B5\u00DE}

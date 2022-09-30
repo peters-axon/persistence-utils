@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.persistence.Tuple;
 
+import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
@@ -20,7 +21,7 @@ public class PersonSearchLazyDataModel extends LazyDataModel<Tuple> {
 	private static final long serialVersionUID = 1L;
 	private List<Tuple> personTuples;
 
-	
+
 	public PersonSearchLazyDataModel() {
 		super();
 	}
@@ -37,14 +38,19 @@ public class PersonSearchLazyDataModel extends LazyDataModel<Tuple> {
 	}
 
 	@Override
-	public Object getRowKey(Tuple tuple) {
+	public String getRowKey(Tuple tuple) {
 		// Field 0 contains the ID.
-		return tuple.get(0);
+		return (String) tuple.get(0);
 	}
 
+	@Override
+	public int count(Map<String, FilterMeta> filterBy) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
-	public List<Tuple> load(int first, int pageSize, List<SortMeta> multiSortMeta, Map<String, Object> filters) {
+	public List<Tuple> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
 		PersonDAO dao = PersonDAO.getInstance();
 
 		SearchFilter filter = new SearchFilter();
@@ -53,19 +59,19 @@ public class PersonSearchLazyDataModel extends LazyDataModel<Tuple> {
 
 		filter
 		.add(PersonSearchField.ID)
-		.add(PersonSearchField.IVY_USER_NAME, filters.get(PersonSearchField.IVY_USER_NAME.name()))
-		.add(PersonSearchField.FIRST_NAME, filters.get(PersonSearchField.FIRST_NAME.name()))
-		.add(PersonSearchField.LAST_NAME, filters.get(PersonSearchField.LAST_NAME.name()))
-		.add(PersonSearchField.BIRTHDATE, filters.get(PersonSearchField.BIRTHDATE.name()))
-		.add(PersonSearchField.MARITAL_STATUS, filters.get(PersonSearchField.MARITAL_STATUS.name()))
-		.add(PersonSearchField.MARITAL_STATUS_LIKE, filters.get(PersonSearchField.MARITAL_STATUS_LIKE.name()))
-		.add(PersonSearchField.SALARY, filters.get(PersonSearchField.SALARY.name()))
-		.add(PersonSearchField.DEPARTMENT_NAME, filters.get(PersonSearchField.DEPARTMENT_NAME.name()))
-		.add(PersonSearchField.SYNC_TO_IVY, filters.get(PersonSearchField.SYNC_TO_IVY.name()));
+		.add(PersonSearchField.IVY_USER_NAME, filterValue(filterBy.get(PersonSearchField.IVY_USER_NAME.name())))
+		.add(PersonSearchField.FIRST_NAME, filterValue(filterBy.get(PersonSearchField.FIRST_NAME.name())))
+		.add(PersonSearchField.LAST_NAME, filterValue(filterBy.get(PersonSearchField.LAST_NAME.name())))
+		.add(PersonSearchField.BIRTHDATE, filterValue(filterBy.get(PersonSearchField.BIRTHDATE.name())))
+		.add(PersonSearchField.MARITAL_STATUS, filterValue(filterBy.get(PersonSearchField.MARITAL_STATUS.name())))
+		.add(PersonSearchField.MARITAL_STATUS_LIKE, filterValue(filterBy.get(PersonSearchField.MARITAL_STATUS_LIKE.name())))
+		.add(PersonSearchField.SALARY, filterValue(filterBy.get(PersonSearchField.SALARY.name())))
+		.add(PersonSearchField.DEPARTMENT_NAME, filterValue(filterBy.get(PersonSearchField.DEPARTMENT_NAME.name())))
+		.add(PersonSearchField.SYNC_TO_IVY, filterValue(filterBy.get(PersonSearchField.SYNC_TO_IVY.name())));
 
-		if(multiSortMeta != null) {
-			for(SortMeta sortMeta : multiSortMeta) {
-				filter.addSort(PersonSearchField.valueOf(sortMeta.getSortField()), sortMeta.getSortOrder() == SortOrder.ASCENDING ? true : false);
+		if(sortBy != null) {
+			for(SortMeta sortMeta : sortBy.values()) {
+				filter.addSort(PersonSearchField.valueOf(sortMeta.getField()), sortMeta.getOrder() == SortOrder.ASCENDING ? true : false);
 			}
 		}
 
@@ -81,5 +87,9 @@ public class PersonSearchLazyDataModel extends LazyDataModel<Tuple> {
 		this.setRowCount((int) dataSize);
 
 		return personTuples;
+	}
+
+	private Object filterValue(FilterMeta filterMeta) {
+		return filterMeta != null ? filterMeta.getFilterValue() : null;
 	}
 }

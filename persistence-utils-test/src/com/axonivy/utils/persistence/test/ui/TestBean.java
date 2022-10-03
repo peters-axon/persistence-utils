@@ -1,7 +1,6 @@
 package com.axonivy.utils.persistence.test.ui;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -18,9 +17,11 @@ public class TestBean {
 
 	public StreamedContent getDBExport() throws FileNotFoundException {
 
-		InputStream dbExportStream = TestService.getDBExport();
-
-		StreamedContent content = new DefaultStreamedContent(dbExportStream, "application/vnd.ms-excel", "testdata.xls");
+		StreamedContent content = DefaultStreamedContent.builder()
+				.stream(() -> TestService.getDBExport())
+				.name("testdata.xls")
+				.contentType("application/vnd.ms-excel")
+				.build();
 
 		return content;
 	}

@@ -197,11 +197,6 @@ public class SimpleWorkflowSession implements IWorkflowSession {
 	}
 
 	@Override
-	public String getHttpSessionIdentifier() {
-		throw new NotMockedException();
-	}
-
-	@Override
 	public List<ISession> getMySessions() {
 		throw new NotMockedException();
 	}
@@ -536,8 +531,8 @@ public class SimpleWorkflowSession implements IWorkflowSession {
 	}
 
 	@Override
-	public IRoleMatcher has() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public IRoleMatcher has() { throw new NotMockedException(); }
+
+	@Override
+	public Set<String> getHttpSessionIdentifiers() { throw new NotMockedException(); }
 }

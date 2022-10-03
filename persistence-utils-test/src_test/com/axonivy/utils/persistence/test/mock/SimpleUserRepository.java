@@ -80,4 +80,6 @@ public class SimpleUserRepository implements IUserRepository {
 		throw new NotMockedException();
 	}
 
+	@Override
+	public IUser findById(String securityMemberId) { throw new NotMockedException(); }
 }

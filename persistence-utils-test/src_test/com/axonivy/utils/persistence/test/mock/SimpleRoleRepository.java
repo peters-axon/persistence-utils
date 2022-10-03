@@ -4,6 +4,7 @@ import java.util.List;
 
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.role.IRoleRepository;
+import ch.ivyteam.ivy.security.role.NewRole;
 
 public class SimpleRoleRepository implements IRoleRepository {
 
@@ -37,4 +38,12 @@ public class SimpleRoleRepository implements IRoleRepository {
 		throw new NotMockedException();
 	}
 
+	@Override
+	public IRole create(String name) { throw new NotMockedException(); }
+
+	@Override
+	public IRole create(NewRole role) { throw new NotMockedException(); }
+
+	@Override
+	public IRole findById(String securityMemberId) { throw new NotMockedException(); }
 }

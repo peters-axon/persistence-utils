@@ -12,7 +12,6 @@ import com.axonivy.utils.persistence.demo.Logger;
 
 import ch.ivyteam.ivy.security.ClusterSessionsSnapshot;
 import ch.ivyteam.ivy.security.EMailNotificationKind;
-import ch.ivyteam.ivy.security.IExternalSecuritySystemProvider;
 import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.ISecurityContext;
@@ -237,10 +236,6 @@ public class SimpleSecurityContext implements ISecurityContext {
 		throw new NotMockedException();	}
 
 	@Override
-	public IExternalSecuritySystemProvider getExternalSecuritySystemProvider() {
-		throw new NotMockedException();	}
-
-	@Override
 	public long getId() {
 		throw new NotMockedException();	}
 
@@ -275,5 +270,13 @@ public class SimpleSecurityContext implements ISecurityContext {
 	public ISessionRepository sessions() {
 		throw new NotMockedException();
 	}
-	
+
+	@Override
+	public void triggerSynchronization() { throw new NotMockedException(); }
+
+	@Override
+	public String getName() { throw new NotMockedException(); }
+
+	@Override
+	public ISecurityDescriptor securityDescriptor() { throw new NotMockedException(); }
 }

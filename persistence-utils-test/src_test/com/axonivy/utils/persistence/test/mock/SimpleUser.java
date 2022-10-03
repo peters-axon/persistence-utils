@@ -280,68 +280,41 @@ public class SimpleUser implements IUser {
 	}
 
 	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean isEnabled() { throw new NotMockedException(); }
 
 	@Override
-	public void enable() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void enable() { throw new NotMockedException(); }
 
 	@Override
-	public void disable() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void disable() { throw new NotMockedException(); }
 
 	@Override
-	public String getSecurityMemberId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String getSecurityMemberId() { throw new NotMockedException(); }
 
 	@Override
-	public Locale getLanguage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Locale getLanguage() { throw new NotMockedException(); }
 
 	@Override
-	public void setLanguage(Locale language) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setLanguage(Locale language) { throw new NotMockedException(); }
 
 	@Override
-	public void setExternalName(String externalName) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setExternalName(String externalName) { throw new NotMockedException(); }
 
 	@Override
-	public IRoleMatcher has() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public IRoleMatcher has() { throw new NotMockedException(); }
 
 	@Override
-	public String getExternalName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String getExternalName() { throw new NotMockedException(); }
 
 	@Override
-	public String getExternalId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String getExternalId() { throw new NotMockedException(); }
 
 	@Override
-	public boolean isExternal() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean isExternal() { throw new NotMockedException(); }
+
+	@Override
+	public Locale getFormattingLanguage() { throw new NotMockedException(); }
+
+	@Override
+	public void setFormattingLanguage(Locale formattingLanguage) { throw new NotMockedException(); }
 }

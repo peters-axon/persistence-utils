@@ -5,26 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IProgressMonitor;
-
-import ch.ivyteam.ivy.application.IProcessModelVersion;
+import ch.ivyteam.ivy.cm.ContentManagementSystem;
+import ch.ivyteam.ivy.cm.ContentObject;
 import ch.ivyteam.ivy.cm.IContentManagementSystem;
 import ch.ivyteam.ivy.cm.IContentObject;
 import ch.ivyteam.ivy.cm.IContentObjectValue;
 import ch.ivyteam.ivy.cm.event.ContentManagementEventListener;
 import ch.ivyteam.ivy.persistence.PersistencyException;
-import ch.ivyteam.ivy.search.restricted.exceptions.IndexException;
-import ch.ivyteam.ivy.search.restricted.indexed.IIndexedObject;
-import ch.ivyteam.ivy.search.restricted.indexed.IIndexedSearchQuery;
-import ch.ivyteam.ivy.search.restricted.indexed.IIndexedSearchableSystem;
-import ch.ivyteam.ivy.search.restricted.indexed.ISearchIndex;
-import ch.ivyteam.ivy.search.restricted.indexed.ISearchQueryTerm;
-import ch.ivyteam.ivy.search.restricted.indexed.ISearchableIndexField;
-import ch.ivyteam.ivy.search.restricted.indexed.SearchOperator;
-import ch.ivyteam.ivy.search.restricted.indexed.SearchQueryBuilder.Field;
 
 
 public class SimpleContentManagementSystem implements IContentManagementSystem {
@@ -52,40 +42,7 @@ public class SimpleContentManagementSystem implements IContentManagementSystem {
 	}
 
 	@Override
-	public IProcessModelVersion getProcessModelVersion() { throw new NotMockedException(); }
-
-	@Override
 	public IContentManagementSystem getContentManagementSystem() { throw new NotMockedException(); }
-
-	@Override
-	public <T> T getAdapter(Class<T> arg0) { throw new NotMockedException(); }
-
-	@Override
-	public IIndexedObject createIndexedObject(Object arg0) { throw new NotMockedException(); }
-
-	@Override
-	public void createSearchIndex(IProgressMonitor arg0) throws IndexException { throw new NotMockedException(); }
-
-	@Override
-	public IIndexedSearchQuery createSearchQuery(List<ISearchQueryTerm> arg0, SearchOperator arg1) { throw new NotMockedException(); }
-
-	@Override
-	public IIndexedSearchQuery createSearchQuery(String arg0, ISearchableIndexField arg1) { throw new NotMockedException(); }
-
-	@Override
-	public Field createSearchQueryBuilder() { throw new NotMockedException(); }
-
-	@Override
-	public ISearchIndex getIndex() { throw new NotMockedException(); }
-
-	@Override
-	public IProject getProject() { throw new NotMockedException(); }
-
-	@Override
-	public IIndexedSearchableSystem<?> getSearchableSystem() { throw new NotMockedException(); }
-
-	@Override
-	public boolean isReadyForSearching() { throw new NotMockedException(); }
 
 	@Override
 	public String getName() throws PersistencyException { throw new NotMockedException(); }
@@ -165,29 +122,23 @@ public class SimpleContentManagementSystem implements IContentManagementSystem {
 	public String cr(String uri) { throw new NotMockedException(); }
 
 	@Override
-	public Set<IContentManagementSystem> getAllCmsFromRequiredProjects() throws PersistencyException { throw new NotMockedException(); }
+	public String getKey() { throw new NotMockedException(); }
 
 	@Override
-	public String getKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public ContentObject root() { throw new NotMockedException(); }
 
 	@Override
-	public List<Locale> languages() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Optional<ContentObject> get(String uri) { throw new NotMockedException(); }
 
 	@Override
-	public void addModificationListener(ContentManagementEventListener listener) {
-		// TODO Auto-generated method stub
-		
-	}
+	public Set<Locale> locales() { throw new NotMockedException(); }
 
 	@Override
-	public void removeModificationListener(ContentManagementEventListener listener) {
-		// TODO Auto-generated method stub
-		
-	}
+	public ContentManagementSystem cms() { throw new NotMockedException(); }
+
+	@Override
+	public void addListener(ContentManagementEventListener listener) { throw new NotMockedException(); }
+
+	@Override
+	public void removeListener(ContentManagementEventListener listener) { throw new NotMockedException(); }
 }
